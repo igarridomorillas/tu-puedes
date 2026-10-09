@@ -1,40 +1,700 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>De cáncer a payaso</title>
+    <meta
+      name="description"
+      content="Dossieres y materiales de De cáncer a payaso: charlas motivacionales para centros educativos."
+    />
+    <style>
+      /* Fuentes de los dossieres (Google Fonts, licencia SIL OFL), reutilizadas desde la carpeta del dossier de Arganda */
+      @font-face {
+        font-family: "Anton";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(dossier-de-cancer-a-payaso-arganda-del-rey/fonts/anton.woff2)
+          format("woff2");
+      }
+      @font-face {
+        font-family: "Caveat";
+        font-style: normal;
+        font-weight: 400 700;
+        font-display: swap;
+        src: url(dossier-de-cancer-a-payaso-arganda-del-rey/fonts/caveat.woff2)
+          format("woff2");
+      }
+      @font-face {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 200 1000;
+        font-display: swap;
+        src: url(dossier-de-cancer-a-payaso-arganda-del-rey/fonts/nunito.woff2)
+          format("woff2");
+      }
+
+      :root {
+        --paper: #fbf7f0;
+        --ink: #1f1a17;
+        --ink-2: #4b433d;
+        --red: #e5484d;
+        --blue: #4c6ef5;
+        --yellow: #f7b32b;
+        --mint: #22b39a;
+        --grey: #e8e3db;
+        --grey-2: #d8d1c7;
+        --soft-yellow: #fff1c9;
+        --soft-blue: #e3e9ff;
+        --soft-red: #ffe1df;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        background: var(--paper);
+      }
+      body {
+        font-family: "Nunito", system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+        font-size: 17px;
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        width: 100%;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* ---------- cabecera ---------- */
+      header {
+        position: relative;
+        text-align: center;
+        padding: 64px 0 56px;
+        overflow: hidden;
+      }
+      .torn {
+        position: absolute;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .torn.tl {
+        top: 0;
+        left: 0;
+        width: min(46vw, 460px);
+        height: 90px;
+        transform: scaleX(-1);
+      }
+      .torn.br {
+        bottom: 0;
+        right: 0;
+        width: min(56vw, 560px);
+        height: 110px;
+        transform: scaleY(-1);
+      }
+      header .inner {
+        position: relative;
+        z-index: 1;
+      }
+      .kicker {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--ink-2);
+        transform: rotate(-2deg);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .kicker svg {
+        width: 26px;
+        height: 26px;
+      }
+      h1 {
+        font-family: "Anton", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1;
+        font-size: clamp(44px, 10vw, 96px);
+        margin-top: 10px;
+      }
+      h1 .l2 {
+        color: var(--red);
+      }
+      .motto {
+        margin-top: 18px;
+      }
+      .motto .tp {
+        font-family: "Anton", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: clamp(30px, 6vw, 52px);
+        line-height: 1;
+        color: var(--red);
+      }
+      .motto .fine {
+        display: inline-block;
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        color: var(--blue);
+        font-size: clamp(22px, 4vw, 30px);
+        transform: rotate(-3deg);
+        margin: 4px 0 0 clamp(40px, 12vw, 140px);
+      }
+
+      /* ---------- secciones ---------- */
+      main {
+        flex: 1;
+        padding: 24px 0 72px;
+      }
+      h2.sec {
+        font-family: "Anton", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        line-height: 1.05;
+        font-size: clamp(30px, 5vw, 44px);
+      }
+      .blue {
+        color: var(--blue);
+      }
+      .red {
+        color: var(--red);
+      }
+      .scribble {
+        display: block;
+        width: 220px;
+        max-width: 70%;
+        height: 20px;
+        margin: 2px 0 14px -6px;
+      }
+      .intro {
+        max-width: 640px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--ink-2);
+        margin-bottom: 36px;
+      }
+
+      /* ---------- cromos ---------- */
+      .grid {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 36px 32px;
+      }
+      .card {
+        position: relative;
+        background: #fff;
+        border: 2.5px solid var(--ink);
+        border-radius: 14px;
+        box-shadow: 7px 7px 0 var(--ink);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .card:nth-child(odd) {
+        transform: rotate(-1deg);
+      }
+      .card:nth-child(even) {
+        transform: rotate(0.8deg);
+      }
+      .card:hover {
+        transform: rotate(0) translate(-2px, -2px);
+        box-shadow: 10px 10px 0 var(--ink);
+      }
+      .card .pic {
+        background: var(--c-soft, var(--soft-yellow));
+        border-bottom: 2.5px solid var(--ink);
+        aspect-ratio: 4 / 3;
+        display: block;
+      }
+      .card .pic svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .card .tag {
+        position: absolute;
+        top: 14px;
+        right: -2px;
+        background: var(--c, var(--yellow));
+        color: #fff;
+        border: 2.5px solid var(--ink);
+        border-right: 0;
+        border-radius: 8px 0 0 8px;
+        padding: 2px 12px 2px 14px;
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 1.3;
+      }
+      .card .body {
+        padding: 18px 20px 22px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .card h3 {
+        font-family: "Anton", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 30px;
+        line-height: 1.05;
+      }
+      .card .for {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--ink-2);
+        line-height: 1.2;
+        margin-top: 4px;
+      }
+      .card .meta {
+        font-size: 14px;
+        color: var(--ink-2);
+        margin-top: 6px;
+      }
+      .card .actions {
+        margin-top: auto;
+        padding-top: 18px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        flex: 1 1 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        font-weight: 900;
+        font-size: 15px;
+        border: 2.2px solid var(--ink);
+        border-radius: 10px;
+        padding: 9px 14px;
+        box-shadow: 3px 3px 0 var(--ink);
+        transition:
+          transform 0.12s ease,
+          box-shadow 0.12s ease;
+      }
+      .btn:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 4px 4px 0 var(--ink);
+      }
+      .btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0 var(--ink);
+      }
+      .btn:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 3px;
+      }
+      .btn svg {
+        width: 18px;
+        height: 18px;
+        flex: none;
+      }
+      .btn.view {
+        background: var(--yellow);
+      }
+      .btn.pdf {
+        background: #fff;
+      }
+
+      /* ---------- pie ---------- */
+      footer {
+        border-top: 2px dashed var(--grey-2);
+        padding: 22px 0 28px;
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--ink-2);
+      }
+      footer b {
+        font-weight: 900;
+        color: var(--ink);
+      }
+
+      @media (max-width: 520px) {
+        body {
+          font-size: 16px;
+        }
+        header {
+          padding: 48px 0 44px;
+        }
+        .wrap {
+          padding: 0 16px;
+        }
+        .card:nth-child(n) {
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card,
+        .btn {
+          transition: none;
+        }
+      }
+    </style>
   </head>
   <body>
+    <!-- Símbolos SVG compartidos (mismo estilo que los dossieres) -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <pattern
+          id="grain"
+          width="6"
+          height="6"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle cx="1" cy="1" r="0.7" fill="#cfc6b9" fill-opacity="0.5" />
+          <circle cx="4" cy="4" r="0.6" fill="#cfc6b9" fill-opacity="0.35" />
+        </pattern>
+      </defs>
+      <symbol id="torn-a" viewBox="0 0 400 110" preserveAspectRatio="none">
+        <path
+          fill="#E6E0D7"
+          stroke="#fff"
+          stroke-width="2"
+          d="M0,0 L400,0 L400,101 L384,106 L369,103 L353,95 L340,84 L330,74 L316,62 L305,61 L293,59 L281,55 L267,58 L253,55 L237,49 L222,42 L206,36 L190,42 L181,53 L167,64 L151,81 L137,85 L125,93 L110,92 L100,85 L84,90 L72,88 L58,93 L44,100 L29,97 L21,88 L10,81 L0,67 Z"
+        />
+        <path
+          fill="url(#grain)"
+          d="M0,0 L400,0 L400,101 L384,106 L369,103 L353,95 L340,84 L330,74 L316,62 L305,61 L293,59 L281,55 L267,58 L253,55 L237,49 L222,42 L206,36 L190,42 L181,53 L167,64 L151,81 L137,85 L125,93 L110,92 L100,85 L84,90 L72,88 L58,93 L44,100 L29,97 L21,88 L10,81 L0,67 Z"
+        />
+      </symbol>
+      <symbol id="torn-b" viewBox="0 0 400 110" preserveAspectRatio="none">
+        <path
+          fill="#E6E0D7"
+          stroke="#fff"
+          stroke-width="2"
+          d="M0,0 L400,0 L400,63 L384,60 L370,54 L358,56 L343,59 L328,55 L316,52 L303,43 L286,38 L272,34 L262,28 L248,33 L238,38 L221,46 L206,46 L192,44 L175,45 L164,44 L148,51 L132,56 L118,72 L102,76 L87,79 L74,79 L58,73 L47,76 L31,73 L17,77 L7,83 L0,84 Z"
+        />
+        <path
+          fill="url(#grain)"
+          d="M0,0 L400,0 L400,63 L384,60 L370,54 L358,56 L343,59 L328,55 L316,52 L303,43 L286,38 L272,34 L262,28 L248,33 L238,38 L221,46 L206,46 L192,44 L175,45 L164,44 L148,51 L132,56 L118,72 L102,76 L87,79 L74,79 L58,73 L47,76 L31,73 L17,77 L7,83 L0,84 Z"
+        />
+      </symbol>
+      <symbol id="scribble" viewBox="0 0 300 30" preserveAspectRatio="none">
+        <path
+          d="M4 17 C70 9 160 7 296 11"
+          fill="none"
+          stroke="var(--sc, #1F1A17)"
+          stroke-width="4.5"
+          stroke-linecap="round"
+        />
+        <path
+          d="M26 25 C100 17 190 15 282 19"
+          fill="none"
+          stroke="var(--sc, #1F1A17)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+      </symbol>
+      <symbol id="i-spark" viewBox="0 0 100 100">
+        <path
+          d="M50 6 C54 36 64 46 94 50 C64 54 54 64 50 94 C46 64 36 54 6 50 C36 46 46 36 50 6 Z"
+          style="fill: var(--bl, #f7b32b)"
+          stroke="#1F1A17"
+          stroke-width="5"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24">
+        <path
+          d="M2 12 C5 6 9 4.5 12 4.5 C15 4.5 19 6 22 12 C19 18 15 19.5 12 19.5 C9 19.5 5 18 2 12 Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linejoin="round"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="3.2"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+        />
+      </symbol>
+      <symbol id="i-down" viewBox="0 0 24 24">
+        <path
+          d="M12 3 V15 M6.5 10 L12 15.5 L17.5 10 M4 20.5 H20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </symbol>
+    </svg>
+
     <header>
-      <h1>De cáncer a payaso</h1>
-      <h2>¡Tú puedes! ...pero no solo</h2>
+      <svg class="torn tl" aria-hidden="true"><use href="#torn-b" /></svg>
+      <svg class="torn br" aria-hidden="true"><use href="#torn-a" /></svg>
+      <div class="inner wrap">
+        <div class="kicker">
+          <svg style="--bl: var(--yellow)" aria-hidden="true">
+            <use href="#i-spark" />
+          </svg>
+          Dossieres y materiales
+        </div>
+        <h1>De cáncer <span class="l2">a payaso</span></h1>
+        <div class="motto">
+          <div class="tp">¡Tú puedes!</div>
+          <div class="fine">…pero no tú solo</div>
+        </div>
+      </div>
     </header>
+
     <main>
-      <section>
-        <h3>Eventos motivacionales</h3>
-        <ul>
-          <li>
-            <p>Para institutos de Arganda del Rey</p>
-            <p>
-              <a href="./dossier-de-cancer-a-payaso-arganda-del-rey/">Dossier</a
-              >&nbsp;<a
-                href="./dossier-de-cancer-a-payaso-arganda-del-rey/Dossier De cáncer a payaso - Arganda.pdf"
-                >PDF</a
-              >
-            </p>
+      <section class="wrap" aria-labelledby="charlas">
+        <h2 class="sec" id="charlas">
+          Charlas <span class="blue">motivadoras</span> en centros educativos
+        </h2>
+        <svg class="scribble" style="--sc: var(--red)" aria-hidden="true">
+          <use href="#scribble" />
+        </svg>
+        <p class="intro">
+          Dossieres de nuestra propuesta para el alumnado de cada municipio.
+          Puedes consultarlos en línea o descargarlos en PDF.
+        </p>
+
+        <ul class="grid">
+          <!-- ===== Arganda del Rey ===== -->
+          <li
+            class="card"
+            style="--c: var(--blue); --c-soft: var(--soft-blue)"
+          >
+            <a
+              class="pic"
+              href="dossier-de-cancer-a-payaso-arganda-del-rey/"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 400 300" role="img">
+                <title>Dibujo de un pueblo con campanario, casas y viñedos</title>
+                <!-- sol -->
+                <circle cx="318" cy="70" r="34" fill="#f7b32b" />
+                <g stroke="#f7b32b" stroke-width="5" stroke-linecap="round">
+                  <path d="M318 20 V8 M360 34 L369 25 M372 70 H384 M276 34 L267 25" />
+                </g>
+                <!-- colinas -->
+                <path
+                  d="M0 190 C70 150 140 160 210 180 C280 200 340 160 400 170 V300 H0 Z"
+                  fill="#c9d3ff"
+                />
+                <path
+                  d="M0 225 C90 200 190 205 260 220 C320 232 360 222 400 215 V300 H0 Z"
+                  fill="#22b39a"
+                  opacity="0.85"
+                />
+                <!-- viñas -->
+                <g
+                  fill="none"
+                  stroke="#1f1a17"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                >
+                  <path d="M20 262 C80 252 150 252 210 258" />
+                  <path d="M20 284 C90 274 160 274 230 280" />
+                </g>
+                <g fill="#7b3f8c" stroke="#1f1a17" stroke-width="1.6">
+                  <circle cx="44" cy="257" r="5" />
+                  <circle cx="90" cy="253" r="5" />
+                  <circle cx="136" cy="253" r="5" />
+                  <circle cx="182" cy="255" r="5" />
+                  <circle cx="60" cy="279" r="5" />
+                  <circle cx="110" cy="275" r="5" />
+                  <circle cx="160" cy="275" r="5" />
+                  <circle cx="208" cy="277" r="5" />
+                </g>
+                <!-- casas -->
+                <g stroke="#1f1a17" stroke-width="3" stroke-linejoin="round">
+                  <path d="M228 230 V178 L256 156 L284 178 V230 Z" fill="#fff" />
+                  <path d="M222 180 L256 152 L290 180" fill="none" />
+                  <path d="M284 230 V190 L312 170 L340 190 V230 Z" fill="#ffe1df" />
+                  <path d="M279 192 L312 166 L345 192" fill="none" />
+                  <path d="M60 232 V196 L88 176 L116 196 V232 Z" fill="#fff1c9" />
+                  <path d="M54 198 L88 172 L122 198" fill="none" />
+                  <!-- campanario -->
+                  <path d="M134 232 V120 H178 V232 Z" fill="#fff" />
+                  <path d="M128 122 L156 88 L184 122 Z" fill="#e5484d" />
+                  <path d="M156 88 V64 M146 74 H166" fill="none" />
+                  <path d="M146 166 V146 C146 136 166 136 166 146 V166 Z" fill="#4c6ef5" />
+                </g>
+                <g fill="#1f1a17">
+                  <rect x="244" y="190" width="12" height="14" rx="2" />
+                  <rect x="250" y="210" width="14" height="20" rx="2" />
+                  <rect x="300" y="198" width="12" height="12" rx="2" />
+                  <rect x="80" y="210" width="14" height="22" rx="2" />
+                  <rect x="148" y="196" width="16" height="36" rx="8" />
+                </g>
+                <!-- chispa -->
+                <use href="#i-spark" x="22" y="40" width="40" height="40" style="--bl: var(--red)" />
+              </svg>
+            </a>
+            <span class="tag">Institutos</span>
+            <div class="body">
+              <h3>Arganda del Rey</h3>
+              <p class="for">Para institutos de Arganda del Rey</p>
+              <p class="meta">Dossier para el Ayuntamiento · octubre de 2026</p>
+              <div class="actions">
+                <a
+                  class="btn view"
+                  href="dossier-de-cancer-a-payaso-arganda-del-rey/"
+                >
+                  <svg aria-hidden="true"><use href="#i-eye" /></svg>
+                  Ver dossier
+                </a>
+                <a
+                  class="btn pdf"
+                  href="dossier-de-cancer-a-payaso-arganda-del-rey/Dossier%20De%20c%C3%A1ncer%20a%20payaso%20-%20Arganda.pdf"
+                  download
+                >
+                  <svg aria-hidden="true"><use href="#i-down" /></svg>
+                  Descargar PDF
+                </a>
+              </div>
+            </div>
           </li>
-          <li>
-            <p>Para centros formativos de Pinto</p>
-            <p>
-              <a href="./dossier-de-cancer-a-payaso-pinto/">Dossier</a>&nbsp;<a
-                href="./dossier-de-cancer-a-payaso-pinto/Dossier De cáncer a payaso - Pinto.pdf"
-                >PDF</a
-              >
-            </p>
+
+          <!-- ===== Pinto ===== -->
+          <li
+            class="card"
+            style="--c: var(--red); --c-soft: var(--soft-red)"
+          >
+            <a
+              class="pic"
+              href="dossier-de-cancer-a-payaso-pinto/dossier-tu-puedes-pinto.html"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 400 300" role="img">
+                <title>Dibujo de un pueblo con una torre almenada, casas y árboles</title>
+                <!-- sol -->
+                <circle cx="80" cy="70" r="34" fill="#f7b32b" />
+                <g stroke="#f7b32b" stroke-width="5" stroke-linecap="round">
+                  <path d="M80 20 V8 M38 34 L29 25 M26 70 H14 M122 34 L131 25" />
+                </g>
+                <!-- nubes -->
+                <g fill="#fff" stroke="#1f1a17" stroke-width="2.4">
+                  <path d="M300 74 C300 60 320 56 328 66 C334 54 356 56 356 72 C368 72 370 88 356 88 H306 C294 88 292 74 300 74 Z" />
+                </g>
+                <!-- llanura -->
+                <path
+                  d="M0 200 C80 186 170 190 240 198 C310 206 360 196 400 192 V300 H0 Z"
+                  fill="#ffc9c6"
+                />
+                <path
+                  d="M0 236 C100 222 200 226 280 236 C340 242 370 236 400 232 V300 H0 Z"
+                  fill="#f7b32b"
+                  opacity="0.75"
+                />
+                <!-- surcos -->
+                <g
+                  fill="none"
+                  stroke="#1f1a17"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  opacity="0.6"
+                >
+                  <path d="M30 266 C110 256 200 258 290 266" />
+                  <path d="M60 286 C140 278 230 280 330 288" />
+                </g>
+                <!-- torre almenada -->
+                <g stroke="#1f1a17" stroke-width="3" stroke-linejoin="round">
+                  <path
+                    d="M166 240 V112 H160 V92 H174 V102 H188 V92 H202 V102 H216 V92 H230 V112 H224 V240 Z"
+                    fill="#fff"
+                  />
+                  <path d="M166 112 H224" fill="none" />
+                  <path d="M188 240 V214 C188 202 202 202 202 214 V240 Z" fill="#1f1a17" />
+                </g>
+                <g fill="#1f1a17">
+                  <rect x="190" y="132" width="10" height="20" rx="5" />
+                  <rect x="190" y="170" width="10" height="20" rx="5" />
+                </g>
+                <!-- bandera -->
+                <g stroke="#1f1a17" stroke-width="2.6" stroke-linejoin="round">
+                  <path d="M195 92 V60" fill="none" />
+                  <path d="M195 60 L222 67 L195 75 Z" fill="#e5484d" />
+                </g>
+                <!-- casas -->
+                <g stroke="#1f1a17" stroke-width="3" stroke-linejoin="round">
+                  <path d="M60 240 V200 L90 180 L120 200 V240 Z" fill="#e3e9ff" />
+                  <path d="M54 202 L90 176 L126 202" fill="none" />
+                  <path d="M262 240 V196 L292 174 L322 196 V240 Z" fill="#fff1c9" />
+                  <path d="M256 198 L292 170 L328 198" fill="none" />
+                </g>
+                <g fill="#1f1a17">
+                  <rect x="82" y="214" width="14" height="26" rx="2" />
+                  <rect x="284" y="210" width="14" height="14" rx="2" />
+                </g>
+                <!-- árboles -->
+                <g stroke="#1f1a17" stroke-width="2.6">
+                  <path d="M138 240 V222" />
+                  <circle cx="138" cy="210" r="15" fill="#22b39a" />
+                  <path d="M346 240 V220" />
+                  <circle cx="346" cy="206" r="17" fill="#22b39a" />
+                </g>
+                <use href="#i-spark" x="330" y="130" width="36" height="36" style="--bl: var(--blue)" />
+              </svg>
+            </a>
+            <span class="tag">Centros formativos</span>
+            <div class="body">
+              <h3>Pinto</h3>
+              <p class="for">Para centros formativos de Pinto</p>
+              <p class="meta">Dossier para el Ayuntamiento · octubre de 2026</p>
+              <div class="actions">
+                <a
+                  class="btn view"
+                  href="dossier-de-cancer-a-payaso-pinto/dossier-tu-puedes-pinto.html"
+                >
+                  <svg aria-hidden="true"><use href="#i-eye" /></svg>
+                  Ver dossier
+                </a>
+                <a
+                  class="btn pdf"
+                  href="dossier-de-cancer-a-payaso-pinto/Dossier%20De%20c%C3%A1ncer%20a%20payaso%20-%20Pinto.pdf"
+                  download
+                >
+                  <svg aria-hidden="true"><use href="#i-down" /></svg>
+                  Descargar PDF
+                </a>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
     </main>
+
+    <footer>
+      <div class="wrap">
+        <b>Andrés Simarro</b> e <b>Iván Garrido</b> · De cáncer a payaso ·
+        2026
+      </div>
+    </footer>
   </body>
 </html>
