@@ -1,0 +1,3550 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dossier ¡Tú puedes!</title>
+    <style>
+      /* Fuentes de Google Fonts (licencia SIL OFL), guardadas en local para que el PDF salga igual sin conexión */
+      @font-face {
+        font-family: "Anton";
+        font-style: normal;
+        font-weight: 400;
+        src: url(fonts/anton.woff2) format("woff2");
+      }
+      @font-face {
+        font-family: "Caveat";
+        font-style: normal;
+        font-weight: 400 700;
+        src: url(fonts/caveat.woff2) format("woff2");
+      }
+      @font-face {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 200 1000;
+        src: url(fonts/nunito.woff2) format("woff2");
+      }
+      @font-face {
+        font-family: "Nunito";
+        font-style: italic;
+        font-weight: 200 1000;
+        src: url(fonts/nunito-italic.woff2) format("woff2");
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      :root {
+        --paper: #fbf7f0;
+        --ink: #1f1a17;
+        --ink-2: #4b433d;
+        --red: #e5484d;
+        --blue: #4c6ef5;
+        --yellow: #f7b32b;
+        --mint: #22b39a;
+        --grey: #e8e3db;
+        --grey-2: #d8d1c7;
+        --soft-yellow: #fff1c9;
+        --soft-blue: #e3e9ff;
+        --soft-red: #ffe1df;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: #9a948c;
+      }
+      body {
+        font-family: "Nunito", sans-serif;
+        color: var(--ink);
+        font-size: 10.5pt;
+        line-height: 1.5;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page {
+        width: 210mm;
+        height: 297mm;
+        position: relative;
+        overflow: hidden;
+        background: var(--paper);
+        margin: 10mm auto;
+        padding: 22mm 18mm 18mm;
+        break-after: page;
+        page-break-after: always;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+      }
+      .page:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+      @media print {
+        html,
+        body {
+          background: none;
+        }
+        .page {
+          margin: 0;
+          box-shadow: none;
+        }
+      }
+      .page > :where(:not(.torn):not(.deco)) {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ---------- papel rasgado ---------- */
+      .torn {
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .torn.top {
+        top: 0;
+      }
+      .torn.bottom {
+        bottom: 0;
+        transform: scaleY(-1);
+      }
+      .torn.left {
+        left: 0;
+      }
+      .torn.right {
+        right: 0;
+      }
+      .torn.flipx.top {
+        transform: scaleX(-1);
+      }
+      .torn.flipx.bottom {
+        transform: scale(-1, -1);
+      }
+      .deco {
+        position: absolute;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      /* ---------- tipografía ---------- */
+      .display {
+        font-family: "Anton", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        line-height: 0.95;
+      }
+      .hand {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+      }
+      .blue {
+        color: var(--blue);
+      }
+      .red {
+        color: var(--red);
+      }
+      .yellow {
+        color: var(--yellow);
+      }
+      .mint {
+        color: var(--mint);
+      }
+      h1.sec {
+        font-family: "Anton", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 38pt;
+        line-height: 1;
+        letter-spacing: 0.5px;
+      }
+      h1.sec + .scribble {
+        display: block;
+        width: 62mm;
+        height: 6mm;
+        margin: 1mm 0 6mm -2mm;
+      }
+      h2 {
+        font-family: "Anton", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 17pt;
+        letter-spacing: 0.4px;
+        line-height: 1.05;
+        margin-bottom: 2mm;
+      }
+      h3 {
+        font-weight: 900;
+        font-size: 11.5pt;
+        line-height: 1.25;
+        margin-bottom: 1mm;
+      }
+      p + p {
+        margin-top: 2.6mm;
+      }
+      .lead {
+        font-size: 12.5pt;
+        line-height: 1.45;
+        font-weight: 600;
+      }
+      .small {
+        font-size: 8.5pt;
+        line-height: 1.4;
+        color: var(--ink-2);
+      }
+      .pnum {
+        position: absolute;
+        right: 16mm;
+        bottom: 9mm;
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 18pt;
+        color: var(--ink-2);
+        z-index: 3;
+      }
+      .pnum::before {
+        content: "";
+        display: inline-block;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: var(--red);
+        vertical-align: -1.3mm;
+        margin-right: 2mm;
+        box-shadow:
+          inset -2px -2px 0 rgba(0, 0, 0, 0.18),
+          inset 2px 2px 0 rgba(255, 255, 255, 0.35);
+      }
+      .foot {
+        position: absolute;
+        left: 18mm;
+        bottom: 10mm;
+        font-size: 8pt;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        color: var(--ink-2);
+        z-index: 3;
+      }
+
+      /* ---------- iconos y garabatos ---------- */
+      svg.ic {
+        width: 18mm;
+        height: 18mm;
+        flex: none;
+        overflow: visible;
+      }
+      .ink {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 3.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .ink-thin {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .nose {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 34% 32%,
+          #ff9a9d 0 14%,
+          var(--red) 15% 100%
+        );
+        box-shadow: inset -2px -3px 0 rgba(0, 0, 0, 0.18);
+      }
+
+      /* ---------- componentes ---------- */
+      .card {
+        background: #fff;
+        border: 2.4px solid var(--ink);
+        border-radius: 4mm 2.5mm 4.5mm 3mm;
+        padding: 4.5mm 5mm;
+        position: relative;
+      }
+      .card.shadow {
+        box-shadow: 2.2mm 2.2mm 0 var(--ink);
+      }
+      .card.y {
+        background: var(--soft-yellow);
+      }
+      .card.b {
+        background: var(--soft-blue);
+      }
+      .card.r {
+        background: var(--soft-red);
+      }
+      .tape {
+        position: absolute;
+        width: 26mm;
+        height: 7mm;
+        background: rgba(247, 179, 43, 0.75);
+        top: -3.5mm;
+        left: 50%;
+        transform: translateX(-50%) rotate(-3deg);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+      }
+      .tape.blue {
+        background: rgba(76, 110, 245, 0.55);
+      }
+      .tape.red {
+        background: rgba(229, 72, 77, 0.55);
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.5mm;
+        border: 2px solid var(--ink);
+        border-radius: 20mm;
+        padding: 0.8mm 3.5mm;
+        font-weight: 800;
+        font-size: 9.5pt;
+        background: #fff;
+        white-space: nowrap;
+      }
+      .chip.y {
+        background: var(--yellow);
+      }
+      .chip.b {
+        background: var(--blue);
+        color: #fff;
+      }
+      .chip.r {
+        background: var(--red);
+        color: #fff;
+      }
+      .row {
+        display: flex;
+        gap: 6mm;
+      }
+      .col {
+        flex: 1;
+        min-width: 0;
+      }
+      ul.clean {
+        list-style: none;
+      }
+      ul.clean li {
+        position: relative;
+        padding-left: 6mm;
+        margin-bottom: 1.8mm;
+      }
+      ul.clean li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1.9mm;
+        width: 3mm;
+        height: 3mm;
+        border-radius: 50%;
+        background: var(--red);
+      }
+      ul.clean.blue-dots li::before {
+        background: var(--blue);
+      }
+      ul.clean.yellow-dots li::before {
+        background: var(--yellow);
+      }
+      .numc {
+        position: relative;
+        width: 11mm;
+        height: 11mm;
+        flex: none;
+        display: grid;
+        place-items: center;
+        font-family: "Anton", sans-serif;
+        font-size: 15pt;
+      }
+      .numc svg {
+        position: absolute;
+        inset: -1mm;
+        width: 13mm;
+        height: 13mm;
+      }
+
+      /* ---------- portada ---------- */
+      .cover {
+        padding: 0;
+      }
+      .cover .titles {
+        position: absolute;
+        left: 16mm;
+        top: 38mm;
+        width: 130mm;
+        z-index: 4;
+      }
+      .cover .kicker {
+        font-family: "Anton", sans-serif;
+        font-size: 16pt;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+        margin-bottom: 10mm;
+      }
+      .cover .big {
+        font-family: "Anton", sans-serif;
+        text-transform: uppercase;
+        font-size: 104pt;
+        line-height: 0.86;
+        letter-spacing: 1px;
+      }
+      .cover .big .l2 {
+        color: var(--red);
+        display: block;
+      }
+      .cover .fine {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        color: var(--blue);
+        font-size: 21pt;
+        margin: 3mm 0 0 34mm;
+        transform: rotate(-3deg);
+        display: inline-block;
+      }
+      .cover .sub {
+        margin-top: 12mm;
+        font-size: 15pt;
+        line-height: 1.3;
+        font-weight: 800;
+        max-width: 84mm;
+      }
+      .cover .sub span {
+        background: linear-gradient(
+          transparent 58%,
+          rgba(247, 179, 43, 0.6) 58% 92%,
+          transparent 92%
+        );
+      }
+      .cover .for {
+        margin-top: 6mm;
+        display: inline-block;
+        border: 2.4px solid var(--ink);
+        border-radius: 3mm;
+        padding: 2.2mm 4mm;
+        font-weight: 800;
+        font-size: 11pt;
+        background: #fff;
+        box-shadow: 1.6mm 1.6mm 0 var(--ink);
+        transform: rotate(-1.2deg);
+      }
+      .cover .presented {
+        position: absolute;
+        left: 16mm;
+        bottom: 20mm;
+        z-index: 4;
+        font-size: 9.5pt;
+        letter-spacing: 2.2px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .cover .presented b {
+        font-weight: 900;
+      }
+      .cover .clown {
+        position: absolute;
+        right: -8mm;
+        bottom: 0;
+        width: 110mm;
+        z-index: 3;
+      }
+      .cover .splash {
+        position: absolute;
+        right: 0;
+        bottom: 22mm;
+        width: 106mm;
+        height: 132mm;
+        z-index: 2;
+      }
+
+      /* ---------- línea de tiempo ---------- */
+      .tl {
+        position: relative;
+        margin-left: 2mm;
+      }
+      .tl-item {
+        display: grid;
+        grid-template-columns: 24mm 1fr;
+        gap: 4mm;
+        align-items: start;
+        padding: 4.2mm 0;
+        position: relative;
+      }
+      .tl-time {
+        font-family: "Anton", sans-serif;
+        font-size: 12.5pt;
+        text-align: center;
+        border: 2.2px solid var(--ink);
+        border-radius: 10mm;
+        padding: 0.6mm 0;
+        background: #fff;
+        position: relative;
+        z-index: 2;
+      }
+      .tl-time.y {
+        background: var(--yellow);
+      }
+      .tl-time.b {
+        background: var(--blue);
+        color: #fff;
+      }
+      .tl-time.r {
+        background: var(--red);
+        color: #fff;
+      }
+      .tl-time.g {
+        background: var(--grey);
+      }
+      .tl::before {
+        content: "";
+        position: absolute;
+        left: 12mm;
+        top: 6mm;
+        bottom: 6mm;
+        border-left: 2.4px dashed var(--ink-2);
+        z-index: 1;
+      }
+      .tl-item h3 {
+        margin-bottom: 0.4mm;
+      }
+      .tl-item p {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+      .tl-item .who {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 13pt;
+        color: var(--blue);
+        margin-left: 1.5mm;
+      }
+
+      /* ---------- polaroids ---------- */
+      .pola {
+        background: #fff;
+        padding: 2.6mm 2.6mm 9mm;
+        box-shadow: 0 1.2mm 3mm rgba(0, 0, 0, 0.22);
+        position: absolute;
+      }
+      .pola img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .pola .ph {
+        width: 100%;
+        overflow: hidden;
+      }
+      .pola .cap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 1.2mm;
+        text-align: center;
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 13.5pt;
+        line-height: 1;
+      }
+
+      /* ---------- contacto ---------- */
+      .oval {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        text-align: center;
+      }
+      .oval svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .oval .t {
+        position: relative;
+        font-family: "Anton", sans-serif;
+        text-transform: uppercase;
+        line-height: 1.15;
+      }
+      .oval .t small {
+        display: block;
+        font-family: "Nunito", sans-serif;
+        text-transform: none;
+        font-weight: 800;
+        font-size: 11pt;
+        letter-spacing: 0;
+        margin-top: 1mm;
+      }
+      .fill-me {
+        background: var(--yellow);
+        padding: 0 1.5mm;
+        border-radius: 1mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================= SÍMBOLOS (papel rasgado, garabatos e iconos) ================= -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <pattern
+          id="grain"
+          width="40"
+          height="40"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle
+            cx="18.1"
+            cy="22.4"
+            r="0.76"
+            fill="#ffffff"
+            fill-opacity="0.23"
+          />
+          <circle
+            cx="34.2"
+            cy="7.6"
+            r="0.69"
+            fill="#ffffff"
+            fill-opacity="0.23"
+          />
+          <circle
+            cx="31.7"
+            cy="3.8"
+            r="0.42"
+            fill="#ffffff"
+            fill-opacity="0.14"
+          />
+          <circle
+            cx="25.4"
+            cy="23.8"
+            r="0.47"
+            fill="#ffffff"
+            fill-opacity="0.22"
+          />
+          <circle
+            cx="24.6"
+            cy="6.3"
+            r="0.26"
+            fill="#8a8279"
+            fill-opacity="0.24"
+          />
+          <circle
+            cx="1.4"
+            cy="35.2"
+            r="0.58"
+            fill="#b3aba1"
+            fill-opacity="0.30"
+          />
+          <circle
+            cx="17.6"
+            cy="33.7"
+            r="0.54"
+            fill="#b3aba1"
+            fill-opacity="0.27"
+          />
+          <circle
+            cx="0.2"
+            cy="3.4"
+            r="0.61"
+            fill="#ffffff"
+            fill-opacity="0.21"
+          />
+          <circle
+            cx="39.8"
+            cy="33.6"
+            r="0.64"
+            fill="#8a8279"
+            fill-opacity="0.19"
+          />
+          <circle
+            cx="20.5"
+            cy="1.2"
+            r="0.56"
+            fill="#8a8279"
+            fill-opacity="0.14"
+          />
+          <circle
+            cx="33.9"
+            cy="15.5"
+            r="0.78"
+            fill="#8a8279"
+            fill-opacity="0.31"
+          />
+          <circle
+            cx="8.5"
+            cy="37.1"
+            r="0.28"
+            fill="#ffffff"
+            fill-opacity="0.21"
+          />
+          <circle
+            cx="15.9"
+            cy="2.9"
+            r="0.60"
+            fill="#b3aba1"
+            fill-opacity="0.30"
+          />
+          <circle
+            cx="13.5"
+            cy="12.4"
+            r="0.26"
+            fill="#8a8279"
+            fill-opacity="0.21"
+          />
+          <circle
+            cx="5.4"
+            cy="28.3"
+            r="0.26"
+            fill="#b3aba1"
+            fill-opacity="0.23"
+          />
+          <circle
+            cx="7.1"
+            cy="22.4"
+            r="0.50"
+            fill="#ffffff"
+            fill-opacity="0.16"
+          />
+          <circle
+            cx="30.8"
+            cy="16.8"
+            r="0.46"
+            fill="#8a8279"
+            fill-opacity="0.21"
+          />
+          <circle
+            cx="0.0"
+            cy="34.6"
+            r="0.79"
+            fill="#8a8279"
+            fill-opacity="0.26"
+          />
+          <circle
+            cx="8.4"
+            cy="15.8"
+            r="0.72"
+            fill="#8a8279"
+            fill-opacity="0.27"
+          />
+          <circle
+            cx="1.7"
+            cy="5.9"
+            r="0.49"
+            fill="#ffffff"
+            fill-opacity="0.12"
+          />
+          <circle
+            cx="13.2"
+            cy="11.9"
+            r="0.29"
+            fill="#ffffff"
+            fill-opacity="0.14"
+          />
+          <circle
+            cx="25.5"
+            cy="0.6"
+            r="0.45"
+            fill="#8a8279"
+            fill-opacity="0.26"
+          />
+          <circle
+            cx="38.4"
+            cy="19.3"
+            r="0.57"
+            fill="#8a8279"
+            fill-opacity="0.32"
+          />
+          <circle
+            cx="25.1"
+            cy="12.4"
+            r="0.38"
+            fill="#ffffff"
+            fill-opacity="0.26"
+          />
+          <circle
+            cx="7.6"
+            cy="29.6"
+            r="0.77"
+            fill="#b3aba1"
+            fill-opacity="0.17"
+          />
+          <circle
+            cx="35.3"
+            cy="24.1"
+            r="0.48"
+            fill="#8a8279"
+            fill-opacity="0.14"
+          />
+          <circle
+            cx="20.5"
+            cy="10.2"
+            r="0.66"
+            fill="#b3aba1"
+            fill-opacity="0.21"
+          />
+          <circle
+            cx="32.9"
+            cy="23.9"
+            r="0.41"
+            fill="#ffffff"
+            fill-opacity="0.16"
+          />
+          <circle
+            cx="39.1"
+            cy="5.1"
+            r="0.51"
+            fill="#ffffff"
+            fill-opacity="0.27"
+          />
+          <circle
+            cx="24.6"
+            cy="11.2"
+            r="0.75"
+            fill="#8a8279"
+            fill-opacity="0.17"
+          />
+          <circle
+            cx="2.8"
+            cy="16.5"
+            r="0.39"
+            fill="#b3aba1"
+            fill-opacity="0.13"
+          />
+          <circle
+            cx="14.8"
+            cy="22.9"
+            r="0.32"
+            fill="#b3aba1"
+            fill-opacity="0.20"
+          />
+          <circle
+            cx="39.2"
+            cy="26.3"
+            r="0.63"
+            fill="#8a8279"
+            fill-opacity="0.25"
+          />
+          <circle
+            cx="23.6"
+            cy="36.9"
+            r="0.51"
+            fill="#b3aba1"
+            fill-opacity="0.20"
+          />
+          <circle
+            cx="38.5"
+            cy="0.9"
+            r="0.60"
+            fill="#ffffff"
+            fill-opacity="0.23"
+          />
+          <circle
+            cx="12.4"
+            cy="5.5"
+            r="0.29"
+            fill="#b3aba1"
+            fill-opacity="0.22"
+          />
+          <circle
+            cx="29.5"
+            cy="36.0"
+            r="0.66"
+            fill="#b3aba1"
+            fill-opacity="0.28"
+          />
+          <circle
+            cx="14.1"
+            cy="27.4"
+            r="0.75"
+            fill="#b3aba1"
+            fill-opacity="0.32"
+          />
+          <circle
+            cx="37.8"
+            cy="1.2"
+            r="0.52"
+            fill="#ffffff"
+            fill-opacity="0.12"
+          />
+          <circle
+            cx="15.3"
+            cy="23.3"
+            r="0.58"
+            fill="#ffffff"
+            fill-opacity="0.14"
+          />
+          <circle
+            cx="4.6"
+            cy="10.3"
+            r="0.48"
+            fill="#ffffff"
+            fill-opacity="0.20"
+          />
+          <circle
+            cx="27.8"
+            cy="18.3"
+            r="0.50"
+            fill="#ffffff"
+            fill-opacity="0.24"
+          />
+          <circle
+            cx="30.0"
+            cy="1.2"
+            r="0.58"
+            fill="#8a8279"
+            fill-opacity="0.23"
+          />
+          <circle
+            cx="38.3"
+            cy="4.5"
+            r="0.68"
+            fill="#b3aba1"
+            fill-opacity="0.27"
+          />
+          <circle
+            cx="10.2"
+            cy="0.5"
+            r="0.42"
+            fill="#8a8279"
+            fill-opacity="0.28"
+          />
+          <circle
+            cx="20.7"
+            cy="30.2"
+            r="0.44"
+            fill="#b3aba1"
+            fill-opacity="0.33"
+          />
+          <circle
+            cx="35.7"
+            cy="13.1"
+            r="0.62"
+            fill="#b3aba1"
+            fill-opacity="0.17"
+          />
+          <circle
+            cx="32.1"
+            cy="30.2"
+            r="0.36"
+            fill="#8a8279"
+            fill-opacity="0.17"
+          />
+          <circle
+            cx="23.3"
+            cy="12.7"
+            r="0.32"
+            fill="#8a8279"
+            fill-opacity="0.23"
+          />
+          <circle
+            cx="28.4"
+            cy="38.0"
+            r="0.40"
+            fill="#b3aba1"
+            fill-opacity="0.16"
+          />
+          <circle
+            cx="18.9"
+            cy="37.0"
+            r="0.71"
+            fill="#ffffff"
+            fill-opacity="0.21"
+          />
+          <circle
+            cx="19.8"
+            cy="12.6"
+            r="0.71"
+            fill="#b3aba1"
+            fill-opacity="0.35"
+          />
+          <circle
+            cx="12.8"
+            cy="33.1"
+            r="0.40"
+            fill="#ffffff"
+            fill-opacity="0.26"
+          />
+          <circle
+            cx="28.3"
+            cy="22.8"
+            r="0.42"
+            fill="#8a8279"
+            fill-opacity="0.30"
+          />
+          <circle
+            cx="25.6"
+            cy="16.2"
+            r="0.35"
+            fill="#b3aba1"
+            fill-opacity="0.30"
+          />
+          <circle
+            cx="9.5"
+            cy="5.6"
+            r="0.28"
+            fill="#b3aba1"
+            fill-opacity="0.26"
+          />
+          <circle
+            cx="4.4"
+            cy="21.4"
+            r="0.60"
+            fill="#8a8279"
+            fill-opacity="0.20"
+          />
+          <circle
+            cx="27.4"
+            cy="8.0"
+            r="0.51"
+            fill="#8a8279"
+            fill-opacity="0.16"
+          />
+          <circle
+            cx="30.2"
+            cy="21.4"
+            r="0.27"
+            fill="#b3aba1"
+            fill-opacity="0.17"
+          />
+          <circle
+            cx="21.6"
+            cy="37.9"
+            r="0.53"
+            fill="#8a8279"
+            fill-opacity="0.35"
+          />
+          <circle
+            cx="15.7"
+            cy="31.7"
+            r="0.75"
+            fill="#ffffff"
+            fill-opacity="0.14"
+          />
+          <circle
+            cx="15.5"
+            cy="18.0"
+            r="0.36"
+            fill="#8a8279"
+            fill-opacity="0.32"
+          />
+          <circle
+            cx="15.1"
+            cy="22.8"
+            r="0.73"
+            fill="#b3aba1"
+            fill-opacity="0.30"
+          />
+          <circle
+            cx="18.5"
+            cy="26.1"
+            r="0.36"
+            fill="#ffffff"
+            fill-opacity="0.29"
+          />
+          <circle
+            cx="37.0"
+            cy="4.9"
+            r="0.38"
+            fill="#8a8279"
+            fill-opacity="0.21"
+          />
+          <circle
+            cx="39.1"
+            cy="21.5"
+            r="0.68"
+            fill="#ffffff"
+            fill-opacity="0.19"
+          />
+          <circle
+            cx="34.2"
+            cy="13.9"
+            r="0.30"
+            fill="#ffffff"
+            fill-opacity="0.22"
+          />
+          <circle
+            cx="16.9"
+            cy="11.0"
+            r="0.76"
+            fill="#8a8279"
+            fill-opacity="0.17"
+          />
+          <circle
+            cx="17.2"
+            cy="1.4"
+            r="0.54"
+            fill="#8a8279"
+            fill-opacity="0.28"
+          />
+          <circle
+            cx="18.8"
+            cy="40.0"
+            r="0.75"
+            fill="#ffffff"
+            fill-opacity="0.24"
+          />
+        </pattern>
+      </defs>
+      <symbol id="torn-a" viewBox="0 0 400 110" preserveAspectRatio="none">
+        <path
+          fill="#E6E0D7"
+          stroke="#fff"
+          stroke-width="2"
+          d="M0,0 L400,0 L400.0,101.2 L389.8,101.3 L384.6,106.5 L379.0,104.6 L373.4,104.7 L369.8,103.4 L363.9,105.2 L359.7,102.4 L353.5,95.5 L349.5,94.1 L344.8,87.3 L339.9,84.4 L335.0,82.1 L330.7,74.5 L325.6,69.9 L321.9,68.1 L316.5,62.8 L312.3,64.5 L308.8,58.2 L305.0,61.0 L299.0,56.9 L293.0,59.8 L287.1,60.1 L281.9,55.9 L277.7,55.1 L272.8,58.8 L267.5,58.0 L262.9,56.2 L258.0,56.0 L253.9,55.1 L247.7,49.3 L243.0,50.2 L237.9,49.1 L232.2,46.4 L226.2,42.7 L222.7,42.2 L217.6,36.0 L212.7,36.9 L206.3,36.3 L202.1,39.2 L197.0,40.5 L190.6,42.4 L186.6,44.7 L181.3,53.2 L175.7,52.7 L172.1,59.4 L167.4,64.6 L161.6,70.7 L156.8,74.6 L151.2,81.6 L146.1,82.0 L141.3,88.7 L137.1,85.7 L131.8,90.3 L125.8,93.4 L120.5,89.7 L115.0,92.5 L110.3,92.4 L104.6,90.1 L100.1,85.6 L94.1,90.7 L90.0,88.4 L84.8,90.0 L81.3,87.0 L76.4,87.7 L72.2,88.9 L67.2,91.9 L63.0,90.7 L58.3,93.6 L53.6,99.6 L48.5,94.9 L44.9,100.9 L38.6,96.5 L32.9,96.6 L29.4,97.3 L24.6,95.2 L21.0,88.0 L15.2,86.8 L10.3,81.1 L6.0,78.3 L0.0,67.7 Z"
+        />
+        <path
+          fill="url(#grain)"
+          d="M0,0 L400,0 L400.0,101.2 L389.8,101.3 L384.6,106.5 L379.0,104.6 L373.4,104.7 L369.8,103.4 L363.9,105.2 L359.7,102.4 L353.5,95.5 L349.5,94.1 L344.8,87.3 L339.9,84.4 L335.0,82.1 L330.7,74.5 L325.6,69.9 L321.9,68.1 L316.5,62.8 L312.3,64.5 L308.8,58.2 L305.0,61.0 L299.0,56.9 L293.0,59.8 L287.1,60.1 L281.9,55.9 L277.7,55.1 L272.8,58.8 L267.5,58.0 L262.9,56.2 L258.0,56.0 L253.9,55.1 L247.7,49.3 L243.0,50.2 L237.9,49.1 L232.2,46.4 L226.2,42.7 L222.7,42.2 L217.6,36.0 L212.7,36.9 L206.3,36.3 L202.1,39.2 L197.0,40.5 L190.6,42.4 L186.6,44.7 L181.3,53.2 L175.7,52.7 L172.1,59.4 L167.4,64.6 L161.6,70.7 L156.8,74.6 L151.2,81.6 L146.1,82.0 L141.3,88.7 L137.1,85.7 L131.8,90.3 L125.8,93.4 L120.5,89.7 L115.0,92.5 L110.3,92.4 L104.6,90.1 L100.1,85.6 L94.1,90.7 L90.0,88.4 L84.8,90.0 L81.3,87.0 L76.4,87.7 L72.2,88.9 L67.2,91.9 L63.0,90.7 L58.3,93.6 L53.6,99.6 L48.5,94.9 L44.9,100.9 L38.6,96.5 L32.9,96.6 L29.4,97.3 L24.6,95.2 L21.0,88.0 L15.2,86.8 L10.3,81.1 L6.0,78.3 L0.0,67.7 Z"
+        />
+      </symbol>
+      <symbol id="torn-b" viewBox="0 0 400 110" preserveAspectRatio="none">
+        <path
+          fill="#E6E0D7"
+          stroke="#fff"
+          stroke-width="2"
+          d="M0,0 L400,0 L400.0,63.2 L390.8,64.4 L384.4,60.0 L380.8,59.3 L376.8,58.5 L370.5,54.9 L366.5,60.2 L362.2,57.4 L358.4,56.1 L353.5,59.1 L347.0,62.1 L343.1,59.2 L338.6,58.4 L334.6,60.3 L328.5,55.3 L323.9,54.3 L320.0,52.1 L316.3,52.6 L312.3,49.6 L308.6,46.5 L303.2,43.4 L298.5,42.3 L292.6,41.8 L286.8,38.8 L283.1,35.8 L277.8,32.8 L272.2,34.5 L267.0,30.4 L262.2,28.3 L257.9,32.9 L253.0,32.0 L248.8,33.1 L244.8,39.8 L238.7,38.7 L233.9,40.4 L227.8,46.4 L221.7,46.8 L216.8,45.0 L210.7,48.0 L206.5,46.5 L200.7,45.9 L196.8,46.2 L192.0,44.5 L186.4,45.8 L182.1,47.9 L175.6,45.8 L170.0,41.8 L164.5,44.7 L158.2,48.1 L153.3,48.0 L148.0,51.0 L143.6,54.6 L138.4,57.1 L132.9,56.3 L127.9,60.6 L122.1,66.5 L118.3,72.8 L113.9,73.9 L107.8,75.9 L102.6,76.3 L97.0,81.4 L92.6,79.9 L87.3,79.2 L82.5,81.2 L78.4,76.7 L74.7,79.1 L70.1,78.6 L64.9,74.4 L58.9,73.8 L55.1,72.1 L50.7,76.1 L47.0,76.7 L42.4,74.2 L36.0,75.3 L31.8,73.0 L25.9,76.7 L22.1,75.7 L17.3,77.3 L12.3,79.3 L7.7,83.9 L4.0,85.7 L0.0,84.6 Z"
+        />
+        <path
+          fill="url(#grain)"
+          d="M0,0 L400,0 L400.0,63.2 L390.8,64.4 L384.4,60.0 L380.8,59.3 L376.8,58.5 L370.5,54.9 L366.5,60.2 L362.2,57.4 L358.4,56.1 L353.5,59.1 L347.0,62.1 L343.1,59.2 L338.6,58.4 L334.6,60.3 L328.5,55.3 L323.9,54.3 L320.0,52.1 L316.3,52.6 L312.3,49.6 L308.6,46.5 L303.2,43.4 L298.5,42.3 L292.6,41.8 L286.8,38.8 L283.1,35.8 L277.8,32.8 L272.2,34.5 L267.0,30.4 L262.2,28.3 L257.9,32.9 L253.0,32.0 L248.8,33.1 L244.8,39.8 L238.7,38.7 L233.9,40.4 L227.8,46.4 L221.7,46.8 L216.8,45.0 L210.7,48.0 L206.5,46.5 L200.7,45.9 L196.8,46.2 L192.0,44.5 L186.4,45.8 L182.1,47.9 L175.6,45.8 L170.0,41.8 L164.5,44.7 L158.2,48.1 L153.3,48.0 L148.0,51.0 L143.6,54.6 L138.4,57.1 L132.9,56.3 L127.9,60.6 L122.1,66.5 L118.3,72.8 L113.9,73.9 L107.8,75.9 L102.6,76.3 L97.0,81.4 L92.6,79.9 L87.3,79.2 L82.5,81.2 L78.4,76.7 L74.7,79.1 L70.1,78.6 L64.9,74.4 L58.9,73.8 L55.1,72.1 L50.7,76.1 L47.0,76.7 L42.4,74.2 L36.0,75.3 L31.8,73.0 L25.9,76.7 L22.1,75.7 L17.3,77.3 L12.3,79.3 L7.7,83.9 L4.0,85.7 L0.0,84.6 Z"
+        />
+      </symbol>
+      <symbol id="torn-c" viewBox="0 0 400 110" preserveAspectRatio="none">
+        <path
+          fill="#E6E0D7"
+          stroke="#fff"
+          stroke-width="2"
+          d="M0,0 L400,0 L400.0,65.4 L391.6,57.6 L387.8,51.5 L383.1,49.1 L378.9,48.9 L375.1,45.0 L371.2,37.2 L366.8,31.6 L361.7,27.4 L357.6,26.0 L354.1,21.7 L348.3,13.9 L343.6,11.7 L339.1,12.2 L334.7,12.7 L330.1,16.7 L325.9,20.8 L320.3,19.9 L314.6,30.2 L309.6,28.3 L305.2,38.2 L300.3,42.5 L293.9,49.4 L289.4,50.1 L283.4,58.4 L278.4,59.9 L273.2,64.6 L268.8,65.4 L262.3,66.5 L258.5,69.9 L253.7,68.0 L248.5,72.3 L243.1,68.5 L238.9,68.9 L233.4,69.5 L229.0,71.4 L223.3,72.4 L218.0,75.4 L212.7,73.9 L207.0,78.9 L200.6,77.3 L194.9,80.9 L188.9,80.6 L183.0,86.3 L176.9,81.5 L172.9,81.9 L166.9,79.9 L163.0,70.9 L156.7,70.4 L152.0,67.2 L146.5,53.5 L141.9,48.6 L137.7,43.5 L132.8,36.3 L128.1,34.5 L123.2,26.5 L118.1,21.6 L114.1,20.7 L108.6,15.5 L102.8,17.6 L97.2,21.3 L91.3,21.8 L87.5,19.6 L82.7,22.9 L77.9,28.0 L72.1,31.9 L66.1,35.0 L60.2,45.1 L54.5,48.1 L48.6,51.4 L42.5,48.9 L38.1,49.4 L32.8,57.5 L28.0,54.2 L23.9,56.8 L20.0,59.1 L15.8,55.2 L11.6,56.5 L5.6,62.2 L0.0,61.0 Z"
+        />
+        <path
+          fill="url(#grain)"
+          d="M0,0 L400,0 L400.0,65.4 L391.6,57.6 L387.8,51.5 L383.1,49.1 L378.9,48.9 L375.1,45.0 L371.2,37.2 L366.8,31.6 L361.7,27.4 L357.6,26.0 L354.1,21.7 L348.3,13.9 L343.6,11.7 L339.1,12.2 L334.7,12.7 L330.1,16.7 L325.9,20.8 L320.3,19.9 L314.6,30.2 L309.6,28.3 L305.2,38.2 L300.3,42.5 L293.9,49.4 L289.4,50.1 L283.4,58.4 L278.4,59.9 L273.2,64.6 L268.8,65.4 L262.3,66.5 L258.5,69.9 L253.7,68.0 L248.5,72.3 L243.1,68.5 L238.9,68.9 L233.4,69.5 L229.0,71.4 L223.3,72.4 L218.0,75.4 L212.7,73.9 L207.0,78.9 L200.6,77.3 L194.9,80.9 L188.9,80.6 L183.0,86.3 L176.9,81.5 L172.9,81.9 L166.9,79.9 L163.0,70.9 L156.7,70.4 L152.0,67.2 L146.5,53.5 L141.9,48.6 L137.7,43.5 L132.8,36.3 L128.1,34.5 L123.2,26.5 L118.1,21.6 L114.1,20.7 L108.6,15.5 L102.8,17.6 L97.2,21.3 L91.3,21.8 L87.5,19.6 L82.7,22.9 L77.9,28.0 L72.1,31.9 L66.1,35.0 L60.2,45.1 L54.5,48.1 L48.6,51.4 L42.5,48.9 L38.1,49.4 L32.8,57.5 L28.0,54.2 L23.9,56.8 L20.0,59.1 L15.8,55.2 L11.6,56.5 L5.6,62.2 L0.0,61.0 Z"
+        />
+      </symbol>
+
+      <!-- subrayado de rotulador -->
+      <symbol id="scribble" viewBox="0 0 300 30" preserveAspectRatio="none">
+        <path
+          d="M4 17 C70 9 160 7 296 11"
+          fill="none"
+          stroke="var(--sc, #1F1A17)"
+          stroke-width="4.5"
+          stroke-linecap="round"
+        />
+        <path
+          d="M26 25 C100 17 190 15 282 19"
+          fill="none"
+          stroke="var(--sc, #1F1A17)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+      </symbol>
+      <!-- círculo a mano -->
+      <symbol id="hcircle" viewBox="0 0 100 100">
+        <path
+          d="M58 9 C82 12 95 32 92 54 C89 78 68 93 45 91 C21 89 6 70 8 47 C10 24 30 7 54 9 C60 10 64 12 67 15"
+          fill="none"
+          stroke="var(--hc, #1F1A17)"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </symbol>
+      <!-- óvalo a mano (contacto, 50 min) -->
+      <symbol id="hoval" viewBox="0 0 200 100" preserveAspectRatio="none">
+        <path
+          d="M118 6 C168 8 196 28 194 52 C192 78 150 95 98 94 C46 93 6 76 6 50 C6 24 44 6 96 6 C112 6 124 8 136 12"
+          fill="none"
+          stroke="var(--hc, #1F1A17)"
+          stroke-width="2.6"
+          stroke-linecap="round"
+          vector-effect="non-scaling-stroke"
+        />
+      </symbol>
+      <!-- flecha curva -->
+      <symbol id="arrow" viewBox="0 0 100 60">
+        <path
+          d="M6 48 C26 10 62 4 88 22"
+          fill="none"
+          stroke="var(--hc, #1F1A17)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <path
+          d="M74 12 L89 22 L76 34"
+          fill="none"
+          stroke="var(--hc, #1F1A17)"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <!-- mancha de color -->
+      <symbol id="blob" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path
+          d="M52 4 C78 2 97 22 95 48 C93 76 74 97 47 95 C20 93 3 74 5 49 C7 24 26 6 52 4 Z"
+          style="fill: var(--bl, #f7b32b)"
+        />
+      </symbol>
+      <symbol id="splash" viewBox="0 0 200 250" preserveAspectRatio="none">
+        <path
+          d="M104 6 C150 2 186 34 192 82 C198 128 184 168 190 204 C194 236 160 250 116 244 C70 238 28 246 12 210 C-2 178 14 146 8 108 C2 66 20 24 58 12 C74 7 88 7 104 6 Z"
+          style="fill: var(--bl, #f7b32b)"
+        />
+      </symbol>
+
+      <!-- gorro de cocinero -->
+      <symbol id="i-chef" viewBox="0 0 100 100">
+        <path
+          d="M28 22 C40 8 76 10 86 30 C96 52 84 82 58 88 C34 94 12 80 12 56 C12 42 18 32 28 22 Z"
+          style="fill: var(--bl, #f7b32b)"
+          transform="translate(6 4)"
+        />
+        <g class="ink">
+          <path
+            d="M32 64 C16 64 13 42 29 40 C27 24 47 17 56 30 C64 17 87 24 82 42 C97 46 90 67 72 64"
+          />
+          <path d="M32 62 L34 84 L70 84 L72 62" />
+          <path d="M35 74 L69 74" />
+          <path d="M46 62 L46 68 M58 62 L58 68" />
+        </g>
+      </symbol>
+      <!-- gorra militar -->
+      <symbol id="i-cap" viewBox="0 0 100 100">
+        <path
+          d="M24 26 C40 12 78 14 88 36 C96 58 82 84 54 86 C30 88 10 74 10 52 C10 42 16 32 24 26 Z"
+          style="fill: var(--bl, #4c6ef5)"
+          transform="translate(5 4)"
+        />
+        <g class="ink">
+          <path
+            d="M12 44 C16 24 84 20 89 40 C90 49 70 53 50 53 C30 53 12 51 12 44 Z"
+          />
+          <path d="M21 51 L23 63 C40 69 62 69 78 63 L80 51" />
+          <path d="M22 63 C28 80 66 82 79 64" />
+          <path
+            d="M50 30 L53 36 L59.5 36.8 L54.8 41.2 L56 47.5 L50 44.4 L44 47.5 L45.2 41.2 L40.5 36.8 L47 36 Z"
+          />
+        </g>
+      </symbol>
+      <!-- corbata -->
+      <symbol id="i-tie" viewBox="0 0 100 100">
+        <path
+          d="M30 18 C46 8 74 12 80 34 C86 56 80 84 56 90 C34 96 16 80 16 56 C16 40 20 26 30 18 Z"
+          style="fill: var(--bl, #4c6ef5)"
+          transform="translate(5 2)"
+        />
+        <g class="ink">
+          <path d="M26 8 L42 15 M74 8 L58 15" />
+          <path d="M42 14 L58 14 L62 24 L54 31 L46 31 L38 24 Z" />
+          <path d="M46 31 L54 31 L64 76 L50 91 L36 76 Z" />
+          <path d="M44 43 L57 50 M41 57 L60 67 M39 71 L59 81" />
+        </g>
+      </symbol>
+      <!-- olla -->
+      <symbol id="i-pot" viewBox="0 0 100 100">
+        <path
+          d="M24 34 C42 20 80 22 88 44 C96 66 80 92 52 92 C28 92 10 78 12 58 C12 48 16 40 24 34 Z"
+          style="fill: var(--bl, #f7b32b)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path
+            d="M22 48 L78 48 L78 74 C78 82 72 86 64 86 L36 86 C28 86 22 82 22 74 Z"
+          />
+          <path d="M17 48 L83 48" />
+          <path d="M22 56 L11 56 M78 56 L89 56" />
+          <path
+            d="M38 40 C34 34 42 29 38 21 M51 40 C47 34 55 29 51 21 M64 40 C60 34 68 29 64 21"
+          />
+        </g>
+      </symbol>
+      <!-- brújula -->
+      <symbol id="i-compass" viewBox="0 0 100 100">
+        <path
+          d="M26 24 C42 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 26 24 Z"
+          style="fill: var(--bl, #4c6ef5)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <circle cx="50" cy="54" r="32" />
+          <path d="M50 22 L50 17 M45 15 L55 15" />
+          <path d="M50 30 L58 54 L50 78 L42 54 Z" />
+          <path d="M42 54 L58 54" />
+          <path d="M50 30 L58 54 L42 54 Z" style="fill: var(--red)" />
+          <path d="M78 54 L74 54 M26 54 L22 54 M50 82 L50 86" />
+        </g>
+      </symbol>
+      <!-- salvavidas -->
+      <symbol id="i-buoy" viewBox="0 0 100 100">
+        <path
+          d="M24 22 C40 8 80 12 90 38 C98 64 80 92 52 92 C28 92 8 76 10 52 C10 40 16 30 24 22 Z"
+          style="fill: var(--bl, #22b39a)"
+          transform="translate(3 2)"
+        />
+        <circle
+          cx="50"
+          cy="50"
+          r="25"
+          fill="none"
+          stroke="#fff"
+          stroke-width="18"
+        />
+        <path
+          d="M50 25 A25 25 0 0 1 67.7 32.3 M75 50 A25 25 0 0 1 67.7 67.7 M50 75 A25 25 0 0 1 32.3 67.7 M25 50 A25 25 0 0 1 32.3 32.3"
+          fill="none"
+          stroke="var(--red)"
+          stroke-width="18"
+        />
+        <g class="ink">
+          <circle cx="50" cy="50" r="34" />
+          <circle cx="50" cy="50" r="16" />
+          <path
+            d="M26 26 C20 18 30 10 38 15 M74 26 C80 18 70 10 62 15 M26 74 C20 82 30 90 38 85 M74 74 C80 82 70 90 62 85"
+          />
+        </g>
+      </symbol>
+      <!-- notas musicales -->
+      <symbol id="i-music" viewBox="0 0 100 100">
+        <g class="ink">
+          <path d="M36 72 L36 28 L74 19 L74 62" />
+          <path d="M36 37 L74 28" />
+          <ellipse cx="28" cy="73" rx="9" ry="7" style="fill: var(--ink)" />
+          <ellipse cx="66" cy="63" rx="9" ry="7" style="fill: var(--ink)" />
+        </g>
+      </symbol>
+      <!-- chispa -->
+      <symbol id="i-spark" viewBox="0 0 100 100">
+        <path
+          d="M50 6 C54 36 64 46 94 50 C64 54 54 64 50 94 C46 64 36 54 6 50 C36 46 46 36 50 6 Z"
+          style="fill: var(--bl, #f7b32b)"
+          stroke="#1F1A17"
+          stroke-width="3"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <!-- lupa -->
+      <symbol id="i-lupa" viewBox="0 0 100 100">
+        <g class="ink">
+          <circle
+            cx="42"
+            cy="42"
+            r="26"
+            style="fill: rgba(255, 255, 255, 0.55)"
+          />
+          <path d="M61 61 L88 88" style="stroke-width: 8" />
+          <path d="M28 32 C32 24 40 21 46 22" />
+        </g>
+      </symbol>
+      <!-- bocadillo de diálogo -->
+      <symbol id="i-bubble" viewBox="0 0 100 100">
+        <g class="ink">
+          <path
+            d="M18 22 C30 12 72 10 84 24 C94 36 90 58 74 64 C64 68 50 68 42 66 L24 82 L28 62 C14 56 8 34 18 22 Z"
+            style="fill: #fff"
+          />
+          <path
+            d="M34 40 L36 40 M50 40 L52 40 M66 40 L68 40"
+            style="stroke-width: 6"
+          />
+        </g>
+      </symbol>
+      <!-- personas (docente presente) -->
+      <symbol id="i-people" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #f7b32b)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <circle cx="36" cy="34" r="10" />
+          <path d="M18 80 C18 60 26 52 36 52 C46 52 54 60 54 80" />
+          <circle cx="66" cy="40" r="8" />
+          <path d="M52 82 C52 66 58 58 66 58 C74 58 82 66 82 82" />
+        </g>
+      </symbol>
+      <!-- cámara tachada -->
+      <symbol id="i-nocam" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #e5484d)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path
+            d="M16 36 L36 36 L42 28 L58 28 L64 36 L84 36 L84 74 L16 74 Z"
+            style="fill: #fff"
+          />
+          <circle cx="50" cy="54" r="12" />
+          <path d="M14 84 L86 22" style="stroke: var(--red); stroke-width: 7" />
+        </g>
+      </symbol>
+      <!-- documento revisado -->
+      <symbol id="i-doc" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #4c6ef5)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path d="M28 14 L62 14 L76 28 L76 86 L28 86 Z" style="fill: #fff" />
+          <path d="M62 14 L62 28 L76 28" />
+          <path d="M36 40 L66 40 M36 50 L66 50 M36 60 L54 60" />
+          <path
+            d="M50 74 L57 80 L72 64"
+            style="stroke: var(--mint); stroke-width: 5"
+          />
+        </g>
+      </symbol>
+      <!-- prohibido -->
+      <symbol id="i-stop" viewBox="0 0 100 100">
+        <g class="ink">
+          <circle
+            cx="50"
+            cy="50"
+            r="34"
+            style="fill: #fff; stroke: var(--red); stroke-width: 8"
+          />
+          <path d="M26 26 L74 74" style="stroke: var(--red); stroke-width: 8" />
+        </g>
+      </symbol>
+      <!-- sonrisa -->
+      <symbol id="i-smile" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #f7b32b)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <circle cx="50" cy="50" r="34" style="fill: #fff" />
+          <path d="M38 40 L38 44 M62 40 L62 44" style="stroke-width: 5" />
+          <path d="M32 58 C40 72 60 72 68 58" />
+          <circle
+            cx="50"
+            cy="52"
+            r="5"
+            style="fill: var(--red); stroke: none"
+          />
+        </g>
+      </symbol>
+      <!-- silla (sentados) -->
+      <symbol id="i-chair" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #22b39a)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path d="M30 16 L32 54 L72 54" />
+          <path d="M32 54 L30 86 M72 54 L74 86 M40 54 L40 76 M64 54 L64 76" />
+          <path d="M30 30 L36 30" />
+        </g>
+      </symbol>
+      <!-- candado (sin contacto) -->
+      <symbol id="i-lock" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #4c6ef5)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path d="M26 46 L74 46 L74 84 L26 84 Z" style="fill: #fff" />
+          <path d="M36 46 L36 34 C36 22 64 22 64 34 L64 46" />
+          <path d="M50 60 L50 70" style="stroke-width: 5" />
+        </g>
+      </symbol>
+      <!-- escudo con tic -->
+      <symbol id="i-shield" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #22b39a)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path
+            d="M50 12 C60 18 70 20 80 20 C80 54 72 74 50 88 C28 74 20 54 20 20 C30 20 40 18 50 12 Z"
+            style="fill: #fff"
+          />
+          <path
+            d="M36 50 L46 60 L66 38"
+            style="stroke: var(--mint); stroke-width: 6"
+          />
+        </g>
+      </symbol>
+      <!-- encuesta -->
+      <symbol id="i-survey" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #f7b32b)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path d="M24 14 L76 14 L76 86 L24 86 Z" style="fill: #fff" />
+          <circle cx="34" cy="32" r="4" />
+          <circle cx="46" cy="32" r="4" />
+          <circle cx="58" cy="32" r="4" style="fill: var(--ink)" />
+          <circle cx="70" cy="32" r="4" />
+          <circle cx="34" cy="52" r="4" />
+          <circle cx="46" cy="52" r="4" />
+          <circle cx="58" cy="52" r="4" />
+          <circle cx="70" cy="52" r="4" style="fill: var(--ink)" />
+          <circle cx="34" cy="72" r="4" />
+          <circle cx="46" cy="72" r="4" style="fill: var(--ink)" />
+          <circle cx="58" cy="72" r="4" />
+          <circle cx="70" cy="72" r="4" />
+        </g>
+      </symbol>
+      <!-- informe con barras -->
+      <symbol id="i-chart" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #4c6ef5)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path d="M18 84 L84 84" />
+          <path d="M26 84 L26 60 L38 60 L38 84" style="fill: var(--yellow)" />
+          <path d="M46 84 L46 44 L58 44 L58 84" style="fill: var(--red)" />
+          <path d="M66 84 L66 26 L78 26 L78 84" style="fill: #fff" />
+        </g>
+      </symbol>
+      <!-- tutor (manzana / pizarra) -->
+      <symbol id="i-board" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #22b39a)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path d="M14 20 L86 20 L86 66 L14 66 Z" style="fill: #2f4a3e" />
+          <path
+            d="M24 34 C32 30 40 38 48 32 M24 48 L60 48"
+            style="stroke: #fff"
+          />
+          <path d="M30 66 L22 88 M70 66 L78 88" />
+        </g>
+      </symbol>
+      <!-- reloj -->
+      <symbol id="i-clock" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, #e5484d)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <circle cx="50" cy="52" r="32" style="fill: #fff" />
+          <path d="M50 32 L50 52 L64 60" />
+          <path d="M50 22 L50 25 M80 52 L77 52 M50 82 L50 79 M20 52 L23 52" />
+        </g>
+      </symbol>
+      <!-- teléfono -->
+      <symbol id="i-phone" viewBox="0 0 100 100">
+        <g class="ink">
+          <path
+            d="M30 14 L42 14 L48 32 L38 40 C44 54 50 60 62 66 L70 56 L88 62 L88 74 C88 82 82 88 72 86 C42 82 18 58 14 28 C12 18 20 14 30 14 Z"
+            style="fill: var(--yellow)"
+          />
+        </g>
+      </symbol>
+      <!-- sobre -->
+      <symbol id="i-mail" viewBox="0 0 100 100">
+        <g class="ink">
+          <path
+            d="M12 26 L88 26 L88 76 L12 76 Z"
+            style="fill: var(--soft-blue)"
+          />
+          <path d="M12 26 L50 56 L88 26" />
+        </g>
+      </symbol>
+      <!-- papel doblado (equipo de rescate) -->
+      <symbol id="i-note" viewBox="0 0 100 100">
+        <path
+          d="M24 24 C40 10 78 14 88 38 C98 62 82 90 54 92 C30 94 10 78 10 54 C10 42 16 32 24 24 Z"
+          style="fill: var(--bl, transparent)"
+          transform="translate(4 2)"
+        />
+        <g class="ink">
+          <path d="M22 18 L78 14 L80 82 L24 86 Z" style="fill: #fff" />
+          <path d="M32 34 L66 32 M33 50 L60 48 M34 66 L64 64" />
+          <circle cx="28" cy="34" r="2" style="fill: var(--ink)" />
+        </g>
+      </symbol>
+    </svg>
+
+    <!-- ========================= 1 · PORTADA ========================= -->
+    <section class="page cover">
+      <svg class="torn top right" style="width: 150mm; height: 46mm">
+        <use href="#torn-a" />
+      </svg>
+      <svg class="torn bottom left flipx" style="width: 120mm; height: 34mm">
+        <use href="#torn-c" />
+      </svg>
+
+      <svg
+        class="deco"
+        style="
+          left: 15mm;
+          top: 16mm;
+          width: 9mm;
+          height: 9mm;
+          --bl: var(--yellow);
+        "
+      >
+        <use href="#i-spark" />
+      </svg>
+      <div
+        class="deco hand"
+        style="
+          left: 27mm;
+          top: 16mm;
+          font-size: 16pt;
+          color: var(--ink-2);
+          transform: rotate(-2deg);
+        "
+      >
+        Dossier para el Ayuntamiento de Arganda del Rey
+      </div>
+
+      <svg class="splash" style="--bl: var(--yellow)">
+        <use href="#splash" />
+      </svg>
+      <img
+        class="clown"
+        src="img/andres-pulgares.png"
+        alt="Andrés Simarro caracterizado de payaso, con los pulgares hacia arriba"
+      />
+
+      <!-- garabatos: las cuatro «vidas» de los ponentes -->
+      <svg
+        class="deco ic"
+        style="
+          left: 70mm;
+          top: 53mm;
+          width: 24mm;
+          height: 24mm;
+          transform: rotate(-10deg);
+          --bl: var(--blue);
+        "
+      >
+        <use href="#i-cap" />
+      </svg>
+      <div
+        class="deco hand"
+        style="left: 95mm; top: 60mm; font-size: 16pt; transform: rotate(-8deg)"
+      >
+        militar
+      </div>
+      <svg
+        class="deco ic"
+        style="
+          left: 128mm;
+          top: 49mm;
+          width: 24mm;
+          height: 24mm;
+          transform: rotate(8deg);
+          --bl: var(--yellow);
+        "
+      >
+        <use href="#i-chef" />
+      </svg>
+      <div
+        class="deco hand"
+        style="left: 130mm; top: 73mm; font-size: 16pt; transform: rotate(5deg)"
+      >
+        cocinero
+      </div>
+      <svg
+        class="deco ic"
+        style="
+          left: 160mm;
+          top: 47mm;
+          width: 14mm;
+          height: 14mm;
+          transform: rotate(-8deg);
+        "
+      >
+        <use href="#i-music" />
+      </svg>
+      <svg
+        class="deco ic"
+        style="
+          left: 172mm;
+          top: 68mm;
+          width: 23mm;
+          height: 23mm;
+          transform: rotate(12deg);
+          --bl: var(--red);
+        "
+      >
+        <use href="#i-tie" />
+      </svg>
+      <div
+        class="deco hand"
+        style="left: 176mm; top: 91mm; font-size: 16pt; transform: rotate(6deg)"
+      >
+        coach
+      </div>
+      <div
+        class="deco hand"
+        style="
+          left: 128mm;
+          top: 112mm;
+          font-size: 18pt;
+          transform: rotate(-6deg);
+        "
+      >
+        payaso
+      </div>
+      <svg
+        class="deco"
+        style="
+          left: 141mm;
+          top: 124mm;
+          width: 18mm;
+          height: 12mm;
+          transform: rotate(72deg);
+        "
+      >
+        <use href="#arrow" />
+      </svg>
+      <svg
+        class="deco"
+        style="
+          left: 152mm;
+          top: 92mm;
+          width: 8mm;
+          height: 8mm;
+          --bl: var(--red);
+        "
+      >
+        <use href="#i-spark" />
+      </svg>
+      <svg
+        class="deco"
+        style="
+          left: 186mm;
+          top: 112mm;
+          width: 9mm;
+          height: 9mm;
+          --bl: var(--blue);
+        "
+      >
+        <use href="#i-spark" />
+      </svg>
+
+      <div class="titles">
+        <div class="kicker">Charla-espectáculo de humor y motivación</div>
+        <div class="big">¡Tú<span class="l2">puedes!</span></div>
+        <div class="fine">…pero no tú solo</div>
+        <div class="sub">
+          <span
+            >Para el alumnado de 1.º y 2.º de ESO de los institutos de Arganda
+            del Rey</span
+          >
+        </div>
+        <div class="for">
+          Propuesta de programa municipal<br /><span style="font-weight: 600"
+            >Curso 2026-2027</span
+          >
+        </div>
+      </div>
+
+      <div class="presented">
+        Presentado por<br /><b>Andrés Simarro</b> e <b>Iván Garrido</b
+        ><br /><span style="letter-spacing: 1.6px"
+          >Arganda del Rey · octubre de 2026</span
+        >
+      </div>
+    </section>
+
+    <!-- ========================= 2 · ÍNDICE ========================= -->
+    <section class="page">
+      <svg class="torn top left flipx" style="width: 120mm; height: 30mm">
+        <use href="#torn-b" />
+      </svg>
+      <svg class="torn bottom right" style="width: 150mm; height: 40mm">
+        <use href="#torn-a" />
+      </svg>
+
+      <div class="row" style="gap: 10mm; margin-top: 8mm">
+        <div style="width: 62mm; flex: none">
+          <h1 class="sec blue" style="font-size: 52pt">Índice</h1>
+          <svg
+            class="scribble"
+            style="
+              width: 60mm;
+              height: 7mm;
+              display: block;
+              margin: 1mm 0 0 -2mm;
+            "
+          >
+            <use href="#scribble" />
+          </svg>
+          <svg
+            style="
+              width: 46mm;
+              height: 46mm;
+              margin: 14mm 0 0 8mm;
+              --bl: var(--yellow);
+              transform: rotate(-8deg);
+            "
+          >
+            <use href="#i-buoy" />
+          </svg>
+          <p
+            class="hand"
+            style="
+              font-size: 17pt;
+              line-height: 1.1;
+              margin: 4mm 0 0 4mm;
+              transform: rotate(-3deg);
+              color: var(--ink-2);
+            "
+          >
+            Pedir ayuda<br />es de valientes
+          </p>
+        </div>
+        <div class="col" style="padding-top: 4mm">
+          <ol style="list-style: none; font-size: 12.5pt; font-weight: 700">
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>1</span
+              >En pocas palabras
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>2</span
+              >Por qué esta charla
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>3</span
+              >La actividad
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>4</span
+              >Objetivos y mensajes
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>5</span
+              >Quiénes somos
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>6</span
+              >Trayectoria: Achús
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>7</span
+              >Cuidamos al alumnado
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc"
+                ><svg><use href="#hcircle" /></svg>8</span
+              >Formato y evaluación
+            </li>
+            <li
+              style="
+                display: flex;
+                align-items: center;
+                gap: 4mm;
+                margin-bottom: 3.4mm;
+              "
+            >
+              <span class="numc" style="font-size: 13pt"
+                ><svg><use href="#hcircle" /></svg>9</span
+              >Propuesta al Ayuntamiento
+            </li>
+            <li style="display: flex; align-items: center; gap: 4mm">
+              <span class="numc" style="font-size: 13pt"
+                ><svg><use href="#hcircle" /></svg>10</span
+              >Contacto
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div
+        class="card y shadow"
+        style="margin-top: 12mm; padding: 6mm 7mm; transform: rotate(-0.6deg)"
+      >
+        <span class="tape"></span>
+        <h2><span class="red">1 ·</span> En pocas palabras</h2>
+        <p class="lead">
+          Una charla de 50 minutos, en el aula y a dos voces, para chicos y
+          chicas de 12 y 13 años. Con humor y con historias reales, les enseña
+          que los golpes de la vida se superan y que
+          <b>pedir ayuda es de valientes</b>.
+        </p>
+        <p style="margin-top: 3mm">
+          Proponemos al Ayuntamiento de Arganda del Rey llevarla a los grupos de
+          1.º y 2.º de ESO de los institutos del municipio, para que sea
+          gratuita para los centros y las familias.
+        </p>
+        <div
+          style="display: flex; flex-wrap: wrap; gap: 2.4mm; margin-top: 4.5mm"
+        >
+          <span class="chip r">50 minutos</span>
+          <span class="chip">1 grupo, en su aula</span>
+          <span class="chip b">1.º y 2.º de ESO</span>
+          <span class="chip">Docente siempre presente</span>
+          <span class="chip y">Solo necesitamos una pizarra</span>
+        </div>
+      </div>
+      <div class="pnum">2</div>
+    </section>
+
+    <!-- ========================= 3 · POR QUÉ ========================= -->
+    <section class="page">
+      <svg class="torn top right" style="width: 130mm; height: 34mm">
+        <use href="#torn-c" />
+      </svg>
+      <svg class="torn bottom left" style="width: 110mm; height: 30mm">
+        <use href="#torn-b" />
+      </svg>
+
+      <h1 class="sec"><span class="blue">Por qué</span> esta charla</h1>
+      <svg class="scribble" style="--sc: var(--red)">
+        <use href="#scribble" />
+      </svg>
+
+      <div class="row" style="gap: 8mm">
+        <div class="col">
+          <p class="lead">
+            A los 12 y 13 años cambia todo a la vez: el paso al instituto, los
+            amigos, el cuerpo, las redes sociales. Y es una edad en la que
+            cuesta mucho pedir ayuda: da vergüenza, parece de débiles o no se
+            sabe a quién acudir.
+          </p>
+          <p>
+            Muchas charlas para adolescentes se quedan en el «tú puedes con
+            todo». Nosotros queremos contar la otra mitad: que
+            <b>nadie puede solo</b>, que todos tenemos días malos y que de ellos
+            se sale con la ayuda de la gente adecuada.
+          </p>
+        </div>
+        <div style="width: 66mm; flex: none; position: relative">
+          <div
+            class="card shadow"
+            style="
+              text-align: center;
+              padding: 6mm 5mm 5mm;
+              transform: rotate(1.5deg);
+            "
+          >
+            <div
+              style="
+                position: relative;
+                display: inline-block;
+                padding: 2mm 6mm;
+              "
+            >
+              <svg
+                style="
+                  position: absolute;
+                  inset: -3mm -2mm;
+                  width: calc(100% + 4mm);
+                  height: calc(100% + 6mm);
+                  --hc: var(--red);
+                "
+              >
+                <use href="#hoval" />
+              </svg>
+              <span class="display" style="font-size: 40pt; position: relative"
+                >1 de cada 7</span
+              >
+            </div>
+            <p
+              style="
+                margin-top: 3mm;
+                font-weight: 700;
+                font-size: 10.5pt;
+                line-height: 1.35;
+              "
+            >
+              adolescentes de entre 10 y 19 años padece algún trastorno mental.
+            </p>
+            <p class="small" style="margin-top: 2mm">
+              La depresión, la ansiedad y los trastornos del comportamiento
+              están entre las principales causas de enfermedad y discapacidad en
+              la adolescencia.
+            </p>
+            <p class="small" style="margin-top: 2mm; font-style: italic">
+              Fuente: OMS, nota descriptiva «Salud mental del adolescente»,
+              1-9-2025.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="row"
+        style="margin-top: 12mm; gap: 8mm; align-items: flex-start"
+      >
+        <div class="col card b" style="padding: 5mm 6mm">
+          <span class="tape blue"></span>
+          <div
+            style="
+              display: flex;
+              gap: 4mm;
+              align-items: center;
+              margin-bottom: 2mm;
+            "
+          >
+            <svg
+              class="ic"
+              style="width: 15mm; height: 15mm; --bl: var(--yellow)"
+            >
+              <use href="#i-smile" />
+            </svg>
+            <h2 style="margin: 0">¿Por qué con humor?</h2>
+          </div>
+          <p>
+            Porque la risa baja las defensas. Cuando dos adultos se ríen de sí
+            mismos delante de la clase, el alumnado se relaja y escucha. Así, un
+            mensaje serio llega sin sermones y se recuerda.
+          </p>
+        </div>
+        <div class="col card r" style="padding: 5mm 6mm">
+          <span class="tape red"></span>
+          <div
+            style="
+              display: flex;
+              gap: 4mm;
+              align-items: center;
+              margin-bottom: 2mm;
+            "
+          >
+            <svg
+              class="ic"
+              style="width: 15mm; height: 15mm; --bl: var(--blue)"
+            >
+              <use href="#i-bubble" />
+            </svg>
+            <h2 style="margin: 0">¿Por qué con historias reales?</h2>
+          </div>
+          <p>
+            Porque una historia vivida convence más que un consejo. Contamos
+            nuestras propias caídas y cómo salimos de ellas, sin dramatismo y
+            adaptado a su edad.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="card"
+        style="
+          margin-top: 9mm;
+          padding: 4.5mm 6mm;
+          display: flex;
+          gap: 5mm;
+          align-items: center;
+          border-style: dashed;
+        "
+      >
+        <svg class="ic" style="width: 14mm; height: 14mm; --bl: var(--mint)">
+          <use href="#i-shield" />
+        </svg>
+        <p style="font-size: 10pt">
+          <b>Lo que no es:</b> no es una terapia ni sustituye al trabajo de los
+          equipos de orientación. Es una puerta de entrada: que el alumnado sepa
+          que hay salida y a quién puede acudir dentro y fuera del centro.
+        </p>
+      </div>
+
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5mm;
+          margin-top: 12mm;
+        "
+      >
+        <svg style="width: 12mm; height: 12mm; --bl: var(--yellow)">
+          <use href="#i-spark" />
+        </svg>
+        <p
+          class="hand"
+          style="
+            font-size: 24pt;
+            line-height: 1.1;
+            text-align: center;
+            transform: rotate(-1.5deg);
+          "
+        >
+          Todos tenemos días malos.<br /><span class="red"
+            >De ellos se sale, y mejor acompañado.</span
+          >
+        </p>
+        <svg style="width: 9mm; height: 9mm; --bl: var(--blue)">
+          <use href="#i-spark" />
+        </svg>
+      </div>
+      <div class="pnum">3</div>
+    </section>
+
+    <!-- ========================= 4 · LA ACTIVIDAD ========================= -->
+    <section class="page">
+      <svg class="torn top left flipx" style="width: 140mm; height: 32mm">
+        <use href="#torn-a" />
+      </svg>
+      <svg class="torn bottom right" style="width: 120mm; height: 32mm">
+        <use href="#torn-c" />
+      </svg>
+
+      <h1 class="sec">La <span class="red">actividad</span></h1>
+      <svg class="scribble" style="--sc: var(--blue)">
+        <use href="#scribble" />
+      </svg>
+
+      <p class="lead" style="max-width: 150mm">
+        Una charla-espectáculo a dos voces. Dos personajes muy distintos —que
+        somos nosotros mismos— cuentan su vida, hacen reír, hacen pensar y hacen
+        participar a toda la clase.
+      </p>
+
+      <div class="row" style="margin-top: 8mm; gap: 7mm">
+        <div class="col card shadow" style="padding: 5mm 6mm">
+          <div style="display: flex; gap: 1mm; margin-bottom: 2mm">
+            <svg
+              class="ic"
+              style="width: 17mm; height: 17mm; --bl: var(--blue)"
+            >
+              <use href="#i-cap" />
+            </svg>
+            <svg
+              class="ic"
+              style="width: 17mm; height: 17mm; --bl: var(--yellow)"
+            >
+              <use href="#i-chef" />
+            </svg>
+            <span
+              class="nose"
+              style="font-size: 12mm; margin: 2.5mm 0 0 2mm"
+            ></span>
+          </div>
+          <h2>Exmilitar-payaso</h2>
+          <p
+            class="hand"
+            style="
+              font-size: 15pt;
+              color: var(--red);
+              line-height: 1;
+              margin-bottom: 2mm;
+            "
+          >
+            Andrés
+          </p>
+          <p>
+            Militar retirado, cocinero y payaso. Pone la disciplina con gracia,
+            el humor físico y una idea que vale para todo:
+            <b>con lo que hay, se cocina</b>.
+          </p>
+        </div>
+        <div class="col card shadow" style="padding: 5mm 6mm">
+          <div style="display: flex; gap: 1mm; margin-bottom: 2mm">
+            <svg class="ic" style="width: 17mm; height: 17mm; --bl: var(--red)">
+              <use href="#i-tie" />
+            </svg>
+            <svg class="ic" style="width: 17mm; height: 17mm">
+              <use href="#i-bubble" />
+            </svg>
+          </div>
+          <h2>El coach zen</h2>
+          <p
+            class="hand"
+            style="
+              font-size: 15pt;
+              color: var(--blue);
+              line-height: 1;
+              margin-bottom: 2mm;
+            "
+          >
+            Iván
+          </p>
+          <p>
+            De la corbata y la empresa privada al <i>coaching</i>. Pone la
+            calma, la escucha y la improvisación, y responde a casi todo… con
+            otra pregunta.
+          </p>
+        </div>
+      </div>
+      <p
+        class="hand"
+        style="
+          text-align: center;
+          font-size: 17pt;
+          margin-top: 4mm;
+          color: var(--ink-2);
+        "
+      >
+        El contraste entre los dos es el motor del humor.
+      </p>
+
+      <!-- 70 / 30 -->
+      <div style="margin-top: 6mm">
+        <h3 style="margin-bottom: 2mm">La receta: 70 % risa, 30 % verdad</h3>
+        <div
+          style="
+            display: flex;
+            height: 13mm;
+            border: 2.4px solid var(--ink);
+            border-radius: 3mm;
+            overflow: hidden;
+            font-family: &quot;Anton&quot;, sans-serif;
+            font-size: 14pt;
+          "
+        >
+          <div
+            style="
+              width: 70%;
+              background: var(--yellow);
+              display: flex;
+              align-items: center;
+              padding-left: 5mm;
+            "
+          >
+            70 % risa
+          </div>
+          <div
+            style="
+              width: 30%;
+              background: var(--blue);
+              color: #fff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-left: 2.4px solid var(--ink);
+            "
+          >
+            30 % verdad
+          </div>
+        </div>
+      </div>
+
+      <!-- arco emocional -->
+      <div
+        style="margin-top: 9mm; display: flex; gap: 6mm; align-items: center"
+      >
+        <div style="width: 84mm; flex: none">
+          <svg
+            viewBox="0 0 300 120"
+            style="width: 84mm; height: 34mm; overflow: visible"
+          >
+            <path
+              d="M8 34 C50 6 80 10 104 40 C126 70 150 104 182 96 C214 88 230 30 292 18"
+              fill="none"
+              stroke="var(--red)"
+              stroke-width="5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M280 8 L294 18 L280 30"
+              fill="none"
+              stroke="var(--red)"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <text
+              x="20"
+              y="10"
+              font-family="Caveat"
+              font-weight="700"
+              font-size="22"
+              fill="#1F1A17"
+            >
+              risa
+            </text>
+            <text
+              x="132"
+              y="118"
+              font-family="Caveat"
+              font-weight="700"
+              font-size="22"
+              fill="#1F1A17"
+            >
+              historias
+            </text>
+            <text
+              x="214"
+              y="12"
+              font-family="Caveat"
+              font-weight="700"
+              font-size="22"
+              fill="#1F1A17"
+            >
+              juego y cierre
+            </text>
+          </svg>
+        </div>
+        <div class="col">
+          <h3>Un viaje de arriba abajo… y otra vez arriba</h3>
+          <p style="font-size: 10pt">
+            Empezamos riendo, bajamos a las historias de verdad y terminamos
+            jugando y cantando. El alumnado sale del aula con energía y con un
+            mensaje claro.
+          </p>
+        </div>
+      </div>
+
+      <!-- participación -->
+      <div class="card y" style="margin-top: 8mm; padding: 4.5mm 6mm">
+        <h3>Cómo participa la clase</h3>
+        <div
+          style="display: flex; gap: 6mm; align-items: center; margin-top: 1mm"
+        >
+          <svg class="ic" style="width: 14mm; height: 14mm">
+            <use href="#i-music" />
+          </svg>
+          <p style="font-size: 10pt">
+            Cantan, levantan la mano, votan con aplausos y juegan.
+            <b
+              >Siempre sentados, sin señalar a nadie y sin preguntas personales
+              en voz alta.</b
+            >
+            Quien no quiera participar no tiene que hacerlo.
+          </p>
+        </div>
+      </div>
+      <div class="pnum">4</div>
+    </section>
+
+    <!-- ========================= 5 · OBJETIVOS Y MENSAJES ========================= -->
+    <section class="page">
+      <svg class="torn top right" style="width: 120mm; height: 30mm">
+        <use href="#torn-b" />
+      </svg>
+      <svg class="torn bottom left flipx" style="width: 150mm; height: 36mm">
+        <use href="#torn-a" />
+      </svg>
+
+      <h1 class="sec">Objetivos <span class="blue">y mensajes</span></h1>
+      <svg class="scribble" style="--sc: var(--yellow)">
+        <use href="#scribble" />
+      </svg>
+
+      <!-- mensaje central con letra pequeña -->
+      <div
+        class="card shadow"
+        style="
+          text-align: center;
+          padding: 7mm 6mm 6mm;
+          background: #2f4a3e;
+          color: #fff;
+          border-color: var(--ink);
+        "
+      >
+        <p class="hand" style="font-size: 16pt; color: #f3ebd8; opacity: 0.9">
+          El mensaje central, el que tienen que llevarse a casa:
+        </p>
+        <div
+          class="display"
+          style="font-size: 58pt; color: #fff; margin-top: 1mm"
+        >
+          Tú puedes
+        </div>
+        <div style="position: relative; display: inline-block; margin-top: 1mm">
+          <span
+            class="hand"
+            style="font-size: 13pt; color: #f3ebd8; letter-spacing: 0.5px"
+            >…pero no tú solo</span
+          >
+          <svg
+            style="
+              position: absolute;
+              right: -15mm;
+              top: -1.5mm;
+              width: 12mm;
+              height: 12mm;
+              transform: rotate(10deg);
+            "
+          >
+            <use href="#i-lupa" />
+          </svg>
+        </div>
+        <p style="margin-top: 3mm; font-size: 10pt; color: #f3ebd8">
+          Como en los contratos, la frase tiene «letra pequeña»:
+          <b style="color: #fff">«tú puedes» no significa «tú solo».</b>
+        </p>
+      </div>
+
+      <h2 style="margin-top: 11mm">Tres ideas para recordar</h2>
+      <div class="row" style="gap: 5mm; margin-top: 3mm">
+        <div class="col card" style="padding: 4mm 4.5mm">
+          <svg
+            class="ic"
+            style="width: 16mm; height: 16mm; --bl: var(--yellow)"
+          >
+            <use href="#i-pot" />
+          </svg>
+          <h3 style="margin-top: 1mm">1. Con lo que hay, se cocina</h3>
+          <p style="font-size: 9.6pt; line-height: 1.4">
+            La vida cambia la receta muchas veces. Lo que no sale como esperabas
+            no es el final: es otro plato.
+          </p>
+        </div>
+        <div class="col card" style="padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 16mm; height: 16mm; --bl: var(--blue)">
+            <use href="#i-compass" />
+          </svg>
+          <h3 style="margin-top: 1mm">2. Haz caso a quien sabe</h3>
+          <p style="font-size: 9.6pt; line-height: 1.4">
+            El que más grita, en internet o en el patio, no es el que más sabe.
+            Para lo importante, pregunta a quien sabe.
+          </p>
+        </div>
+        <div class="col card" style="padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 16mm; height: 16mm; --bl: var(--mint)">
+            <use href="#i-buoy" />
+          </svg>
+          <h3 style="margin-top: 1mm">3. Pedir ayuda es de valientes</h3>
+          <p style="font-size: 9.6pt; line-height: 1.4">
+            Ninguna de nuestras historias se superó en solitario. Pedir ayuda no
+            es rendirse.
+          </p>
+        </div>
+      </div>
+
+      <h2 style="margin-top: 11mm">Qué buscamos con el alumnado</h2>
+      <div class="row" style="gap: 8mm; font-size: 11pt; margin-top: 3mm">
+        <ul class="clean col">
+          <li>
+            Normalizar que todos tenemos días malos y que de ellos se sale.
+          </li>
+          <li>
+            Distinguir tristeza de depresión y entender que la salud mental se
+            cuida, igual que la física.
+          </li>
+          <li>
+            Presentar el pedir ayuda como un acto de valentía, no de debilidad.
+          </li>
+        </ul>
+        <ul class="clean blue-dots col">
+          <li>
+            Que cada alumno identifique su <b>«equipo de rescate»</b>: tres
+            personas a las que acudir si un día tiene un problema gordo.
+          </li>
+          <li>
+            Dar a conocer los recursos del centro (tutoría y orientación) y, con
+            permiso del centro, el Teléfono ANAR.
+          </li>
+          <li>
+            Fomentar el sentido crítico ante lo que se lee en internet y en las
+            redes.
+          </li>
+        </ul>
+      </div>
+      <div class="pnum">5</div>
+    </section>
+
+    <!-- ========================= 6 · QUIÉNES SOMOS ========================= -->
+    <section class="page">
+      <svg class="torn top right" style="width: 150mm; height: 36mm">
+        <use href="#torn-a" />
+      </svg>
+      <svg class="torn bottom left" style="width: 120mm; height: 30mm">
+        <use href="#torn-b" />
+      </svg>
+
+      <h1 class="sec">Quiénes <span class="blue">somos</span></h1>
+      <svg class="scribble" style="--sc: var(--red)">
+        <use href="#scribble" />
+      </svg>
+
+      <!-- Andrés -->
+      <div style="position: relative; height: 118mm">
+        <svg
+          style="
+            position: absolute;
+            left: -4mm;
+            top: 0;
+            width: 76mm;
+            height: 112mm;
+            --bl: var(--yellow);
+            z-index: 0;
+          "
+        >
+          <use href="#splash" />
+        </svg>
+        <img
+          src="img/andres-pensativo.png"
+          alt="Andrés Simarro caracterizado de payaso, en actitud pensativa"
+          style="
+            position: absolute;
+            left: 2mm;
+            top: -2mm;
+            height: 116mm;
+            z-index: 1;
+          "
+        />
+        <div
+          style="position: absolute; left: 80mm; right: 0; top: 4mm; z-index: 2"
+        >
+          <h2 style="font-size: 24pt; margin-bottom: 0">Andrés Simarro</h2>
+          <p
+            class="hand red"
+            style="font-size: 17pt; line-height: 1.1; margin-bottom: 3mm"
+          >
+            exmilitar-payaso
+          </p>
+          <ul class="clean">
+            <li>
+              <b>Militar retirado, cocinero y payaso.</b> Tres vidas que caben
+              en una charla.
+            </li>
+            <li>
+              Muchos años dedicado al espectáculo. Dirige su propia compañía,
+              <b>Achús y Chusita Eventos</b>, con espectáculos como
+              <i>Vacampamento</i>, <i>El sombrero mágico</i> o
+              <i>Muchupilandia</i>.
+            </li>
+            <li>
+              <b>Payaso de hospital:</b> voluntariado con niños y niñas
+              ingresados en hospitales infantiles.
+            </li>
+            <li>
+              Ha participado en el rodaje de los documentales
+              <i>Soy uno entre cien mil</i> y <i>Camino junto a ti</i>.
+            </li>
+            <li>
+              Sabe captar a públicos de todas las edades: desde los más pequeños
+              hasta los abuelos.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Iván -->
+      <div style="position: relative; height: 80mm; margin-top: 2mm">
+        <div
+          style="position: absolute; left: 0; right: 78mm; top: 6mm; z-index: 2"
+        >
+          <h2 style="font-size: 24pt; margin-bottom: 0">Iván Garrido</h2>
+          <p
+            class="hand blue"
+            style="font-size: 17pt; line-height: 1.1; margin-bottom: 3mm"
+          >
+            el coach zen
+          </p>
+          <ul class="clean blue-dots">
+            <li>
+              <b>Coach</b> especializado en la motivación de personas adultas.
+            </li>
+            <li>Trayectoria profesional en la <b>empresa privada</b>.</li>
+            <li>
+              Empatiza con el público, improvisa y tiene sentido del humor: sabe
+              <b>levantar el ánimo</b> de una sala.
+            </li>
+            <li>
+              En la charla aporta la escucha, las preguntas y la improvisación.
+            </li>
+          </ul>
+        </div>
+        <!-- retrato ilustrado (sustituible por una foto de Iván) -->
+        <div
+          style="
+            position: absolute;
+            right: 4mm;
+            top: 0;
+            width: 66mm;
+            height: 80mm;
+          "
+        >
+          <svg
+            style="
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              --bl: var(--blue);
+            "
+          >
+            <use href="#splash" />
+          </svg>
+          <svg
+            viewBox="0 0 100 100"
+            style="
+              position: absolute;
+              left: 9mm;
+              top: 12mm;
+              width: 48mm;
+              height: 48mm;
+              overflow: visible;
+            "
+          >
+            <g class="ink" style="stroke-width: 2.6">
+              <circle cx="50" cy="30" r="17" style="fill: #ffe6cf" />
+              <path d="M33 26 C36 12 64 10 67 26" style="fill: #5b4636" />
+              <path d="M43 31 L44 31 M56 31 L57 31" style="stroke-width: 4" />
+              <path d="M43 39 C47 43 53 43 57 39" />
+              <path
+                d="M18 98 C18 66 32 54 50 54 C68 54 82 66 82 98"
+                style="fill: #fff"
+              />
+              <path
+                d="M44 54 L56 54 L58 60 L52 64 L48 64 L42 60 Z"
+                style="fill: var(--red)"
+              />
+              <path
+                d="M48 64 L52 64 L58 90 L50 98 L42 90 Z"
+                style="fill: var(--red)"
+              />
+            </g>
+          </svg>
+          <svg
+            viewBox="0 0 100 100"
+            style="
+              position: absolute;
+              right: -4mm;
+              top: -4mm;
+              width: 24mm;
+              height: 24mm;
+              transform: rotate(8deg);
+              overflow: visible;
+            "
+          >
+            <path
+              class="ink"
+              d="M18 22 C30 12 72 10 84 24 C94 36 90 58 74 64 C64 68 50 68 42 66 L24 82 L28 62 C14 56 8 34 18 22 Z"
+              style="fill: #fff"
+            />
+          </svg>
+          <div
+            class="hand"
+            style="
+              position: absolute;
+              right: 1.5mm;
+              top: 1.6mm;
+              font-size: 15pt;
+              transform: rotate(8deg);
+            "
+          >
+            ¿y tú?
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="card b"
+        style="padding: 4mm 6mm; margin-top: 2mm; text-align: center"
+      >
+        <p style="font-size: 11pt">
+          <b>Juntos:</b> uno pone la disciplina con gracia; el otro, la calma y
+          las preguntas. Dos historias reales con golpes muy duros y un final
+          que se puede contar riendo.
+          <b>Un proyecto nacido en Arganda del Rey.</b>
+        </p>
+      </div>
+      <div class="pnum">6</div>
+    </section>
+
+    <!-- ========================= 7 · TRAYECTORIA ========================= -->
+    <section class="page">
+      <svg class="torn top left flipx" style="width: 130mm; height: 30mm">
+        <use href="#torn-b" />
+      </svg>
+      <svg class="torn bottom right" style="width: 120mm; height: 30mm">
+        <use href="#torn-c" />
+      </svg>
+
+      <h1 class="sec">Trayectoria: <span class="red">Achús</span></h1>
+      <svg class="scribble" style="--sc: var(--yellow)">
+        <use href="#scribble" />
+      </svg>
+      <p class="lead" style="max-width: 160mm">
+        Antes de «¡Tú puedes!», Andrés lleva años subido al escenario con su
+        personaje, Achús: espectáculos de humor, magia y globoflexia, eventos y,
+        sobre todo, risas para los niños y niñas ingresados en hospitales.
+      </p>
+
+      <div style="position: relative; height: 186mm; margin-top: 6mm">
+        <div
+          class="pola"
+          style="left: 0; top: 2mm; width: 56mm; transform: rotate(-4deg)"
+        >
+          <div class="ph" style="height: 76mm">
+            <img
+              src="img/cartel-achus.jpg"
+              alt="Cartel del espectáculo de Achús"
+            />
+          </div>
+          <div class="cap">su espectáculo</div>
+        </div>
+        <div
+          class="pola"
+          style="left: 60mm; top: 0; width: 76mm; transform: rotate(2.5deg)"
+        >
+          <div class="ph" style="height: 56mm">
+            <img
+              src="img/hospital-1.jpg"
+              alt="Achús con un niño en una habitación de hospital"
+            />
+          </div>
+          <div class="cap">payaso de hospital</div>
+        </div>
+        <div
+          class="pola"
+          style="left: 140mm; top: 6mm; width: 34mm; transform: rotate(5deg)"
+        >
+          <div class="ph" style="height: 44mm">
+            <img
+              src="img/hospital-2.jpg"
+              alt="Achús con un niño en una cama de hospital"
+              style="object-position: 30% 50%"
+            />
+          </div>
+          <div class="cap" style="font-size: 12pt">en planta</div>
+        </div>
+        <div
+          class="pola"
+          style="left: 4mm; top: 92mm; width: 62mm; transform: rotate(3deg)"
+        >
+          <div class="ph" style="height: 52mm">
+            <img
+              src="img/bomberos-1.jpg"
+              alt="Achús haciendo globoflexia en un parque de bomberos"
+            />
+          </div>
+          <div class="cap">globoflexia con los bomberos</div>
+        </div>
+        <div
+          class="pola"
+          style="left: 72mm; top: 76mm; width: 58mm; transform: rotate(-3deg)"
+        >
+          <div class="ph" style="height: 52mm">
+            <img src="img/bomberos-2.jpg" alt="Achús posando con bomberos" />
+          </div>
+          <div class="cap">eventos</div>
+        </div>
+        <div
+          class="pola"
+          style="left: 132mm; top: 70mm; width: 44mm; transform: rotate(4deg)"
+        >
+          <div class="ph" style="height: 46mm">
+            <img
+              src="img/globos.jpg"
+              alt="Achús con un niño y figuras de globos"
+            />
+          </div>
+          <div class="cap">risas</div>
+        </div>
+        <span class="tape" style="left: 28mm; top: -1mm"></span>
+        <span
+          class="tape blue"
+          style="left: 98mm; top: -3mm; transform: rotate(4deg)"
+        ></span>
+        <span
+          class="tape red"
+          style="left: 36mm; top: 89mm; transform: rotate(-6deg)"
+        ></span>
+        <span
+          class="tape"
+          style="left: 100mm; top: 73mm; transform: rotate(3deg)"
+        ></span>
+        <span
+          class="tape blue"
+          style="left: 154mm; top: 67mm; transform: rotate(-5deg)"
+        ></span>
+
+        <div
+          class="card y"
+          style="
+            position: absolute;
+            left: 4mm;
+            right: 4mm;
+            bottom: 0;
+            padding: 4mm 6mm;
+            display: flex;
+            gap: 5mm;
+            align-items: center;
+            transform: rotate(-0.5deg);
+          "
+        >
+          <svg class="ic" style="width: 14mm; height: 14mm; --bl: var(--red)">
+            <use href="#i-nocam" />
+          </svg>
+          <p style="font-size: 9.8pt">
+            Las caras de los menores aparecen difuminadas. Cuidamos su imagen
+            también fuera del aula, y en las charlas en institutos
+            <b>no se toman fotos, vídeos ni audios del alumnado</b>.
+          </p>
+        </div>
+      </div>
+      <div class="pnum">7</div>
+    </section>
+
+    <!-- ========================= 8 · CUIDAMOS AL ALUMNADO ========================= -->
+    <section class="page">
+      <svg class="torn top right" style="width: 120mm; height: 30mm">
+        <use href="#torn-c" />
+      </svg>
+      <svg class="torn bottom left flipx" style="width: 140mm; height: 34mm">
+        <use href="#torn-a" />
+      </svg>
+
+      <h1 class="sec"><span class="red">Cuidamos</span> al alumnado</h1>
+      <svg class="scribble" style="--sc: var(--blue)">
+        <use href="#scribble" />
+      </svg>
+      <p class="lead" style="max-width: 165mm">
+        Hablamos de temas serios con chicos y chicas de 12 y 13 años. Por eso
+        trabajamos con reglas claras, que pactamos con cada centro antes de
+        entrar en el aula.
+      </p>
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4.5mm 6mm;
+          margin-top: 7mm;
+        "
+      >
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg
+            class="ic"
+            style="width: 15mm; height: 15mm; --bl: var(--yellow)"
+          >
+            <use href="#i-people" />
+          </svg>
+          <div>
+            <h3>Siempre con un docente</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              Un profesor o profesora está presente en el aula toda la sesión.
+              Nunca estamos a solas con alumnos.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 15mm; height: 15mm; --bl: var(--red)">
+            <use href="#i-nocam" />
+          </svg>
+          <div>
+            <h3>Cero fotos, vídeos y audios</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              No captamos la imagen ni la voz del alumnado ni recogemos sus
+              datos personales.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 15mm; height: 15mm; --bl: var(--blue)">
+            <use href="#i-doc" />
+          </svg>
+          <div>
+            <h3>Guion revisado por el centro</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              Dirección y orientación lo leen antes. Avisamos de los temas que
+              tocamos para que el centro valore si algún alumno necesita un
+              apoyo especial.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 15mm; height: 15mm">
+            <use href="#i-stop" />
+          </svg>
+          <div>
+            <h3>Temas que no tratamos</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              Autolesión, suicidio y medicación quedan fuera. Si surge algo
+              delicado, lo derivamos al tutor o tutora y a orientación.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg
+            class="ic"
+            style="width: 15mm; height: 15mm; --bl: var(--yellow)"
+          >
+            <use href="#i-smile" />
+          </svg>
+          <div>
+            <h3>Humor solo sobre nosotros</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              Nunca sobre nadie del público. Sin preguntas en voz alta sobre
+              familia, salud, notas o aspecto físico.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 15mm; height: 15mm; --bl: var(--mint)">
+            <use href="#i-chair" />
+          </svg>
+          <div>
+            <h3>Sin dinámicas físicas</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              El alumnado participa desde su sitio: sin levantarse, sin moverse
+              por el aula y sin contacto.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 15mm; height: 15mm; --bl: var(--blue)">
+            <use href="#i-lock" />
+          </svg>
+          <div>
+            <h3>Sin contacto personal</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              No damos teléfonos, correos ni redes personales al alumnado ni le
+              pedimos los suyos.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; gap: 4mm; padding: 4mm 4.5mm">
+          <svg class="ic" style="width: 15mm; height: 15mm; --bl: var(--mint)">
+            <use href="#i-shield" />
+          </svg>
+          <div>
+            <h3>Certificados en regla</h3>
+            <p style="font-size: 9.6pt; line-height: 1.4">
+              Los dos ponentes aportan el certificado negativo de delitos de
+              naturaleza sexual, obligatorio para trabajar con menores.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="card b shadow"
+        style="
+          margin-top: 8mm;
+          padding: 5mm 6mm;
+          display: flex;
+          gap: 5mm;
+          align-items: center;
+        "
+      >
+        <svg class="ic" style="width: 16mm; height: 16mm">
+          <use href="#i-phone" />
+        </svg>
+        <div>
+          <h3>Siempre con una salida a mano</h3>
+          <p style="font-size: 9.8pt">
+            Al terminar, cada alumno sabe a quién acudir en su centro. Con el
+            visto bueno del centro, damos a conocer el
+            <b>Teléfono ANAR de Ayuda a Niños y Adolescentes (900 20 20 10)</b>,
+            gratuito y confidencial.
+          </p>
+        </div>
+      </div>
+      <div class="pnum">8</div>
+    </section>
+
+    <!-- ========================= 9 · FORMATO Y EVALUACIÓN ========================= -->
+    <section class="page">
+      <svg class="torn top left flipx" style="width: 150mm; height: 34mm">
+        <use href="#torn-a" />
+      </svg>
+      <svg class="torn bottom right" style="width: 110mm; height: 28mm">
+        <use href="#torn-b" />
+      </svg>
+
+      <h1 class="sec"><span class="blue">Formato</span> y requisitos</h1>
+      <svg class="scribble" style="--sc: var(--red)">
+        <use href="#scribble" />
+      </svg>
+
+      <div class="row" style="gap: 8mm; align-items: flex-start">
+        <div class="col">
+          <table
+            style="
+              width: 100%;
+              border-collapse: separate;
+              border-spacing: 0 2.2mm;
+              font-size: 10.5pt;
+            "
+          >
+            <tr>
+              <td style="width: 30mm; font-weight: 900; vertical-align: top">
+                Público
+              </td>
+              <td>1.º y 2.º de ESO (12-13 años)</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 900; vertical-align: top">Grupo</td>
+              <td>Un grupo-clase, en su propia aula</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 900; vertical-align: top">Duración</td>
+              <td>50 minutos: una sesión lectiva</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 900; vertical-align: top">Horario</td>
+              <td>En horario lectivo, por la mañana</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 900; vertical-align: top">Ponentes</td>
+              <td>Dos: Andrés Simarro e Iván Garrido</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 900; vertical-align: top">En el aula</td>
+              <td>El docente del grupo, durante toda la sesión</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 900; vertical-align: top">Material</td>
+              <td>Lo llevamos nosotros: gorros, nariz roja y rotuladores</td>
+            </tr>
+          </table>
+        </div>
+        <div style="width: 62mm; flex: none">
+          <div
+            class="card y shadow"
+            style="text-align: center; padding: 5mm; transform: rotate(2deg)"
+          >
+            <span class="tape blue"></span>
+            <svg
+              class="ic"
+              style="width: 22mm; height: 22mm; --bl: var(--mint)"
+            >
+              <use href="#i-board" />
+            </svg>
+            <p
+              class="hand"
+              style="font-size: 21pt; line-height: 1.05; margin-top: 2mm"
+            >
+              Lo único que necesitamos: una pizarra
+            </p>
+            <p class="small" style="margin-top: 2mm">
+              Sin proyector ni equipo de sonido: una cosa menos que puede
+              fallar.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="sec" style="margin-top: 12mm; font-size: 34pt">
+        <span class="red">Evaluación</span> e impacto
+      </h1>
+      <svg class="scribble" style="--sc: var(--yellow)">
+        <use href="#scribble" />
+      </svg>
+      <p style="max-width: 165mm">
+        Queremos saber si la charla funciona, y que lo sepa también el
+        Ayuntamiento. Por eso cada sesión se evalúa con tres herramientas
+        sencillas:
+      </p>
+
+      <div class="row" style="gap: 5mm; margin-top: 6mm">
+        <div class="col card" style="padding: 4.5mm 5mm">
+          <svg
+            class="ic"
+            style="width: 16mm; height: 16mm; --bl: var(--yellow)"
+          >
+            <use href="#i-survey" />
+          </svg>
+          <h3 style="margin-top: 2mm">Encuesta anónima al alumnado</h3>
+          <p style="font-size: 9.6pt; line-height: 1.4">
+            Escala del 1 al 5, sin texto libre ni datos personales. La reparte y
+            la custodia el centro, que nos pasa solo los resultados agregados.
+          </p>
+        </div>
+        <div class="col card" style="padding: 4.5mm 5mm">
+          <svg class="ic" style="width: 16mm; height: 16mm; --bl: var(--mint)">
+            <use href="#i-note" />
+          </svg>
+          <h3 style="margin-top: 2mm">Valoración del tutor o la tutora</h3>
+          <p style="font-size: 9.6pt; line-height: 1.4">
+            Una ficha breve con su opinión profesional: qué funcionó, qué
+            mejorar y cómo reaccionó el grupo.
+          </p>
+        </div>
+        <div class="col card" style="padding: 4.5mm 5mm">
+          <svg class="ic" style="width: 16mm; height: 16mm; --bl: var(--blue)">
+            <use href="#i-chart" />
+          </svg>
+          <h3 style="margin-top: 2mm">Informe de resultados</h3>
+          <p style="font-size: 9.6pt; line-height: 1.4">
+            Al cerrar cada fase, un informe para el centro y el Ayuntamiento con
+            los datos agregados y las mejoras aplicadas.
+          </p>
+        </div>
+      </div>
+      <p
+        class="hand"
+        style="
+          font-size: 16pt;
+          color: var(--ink-2);
+          margin-top: 6mm;
+          text-align: center;
+        "
+      >
+        Medimos, aprendemos y mejoramos la charla de un centro a otro.
+      </p>
+      <div class="pnum">9</div>
+    </section>
+
+    <!-- ========================= 10 · PROPUESTA AL AYUNTAMIENTO ========================= -->
+    <section class="page">
+      <svg class="torn top right" style="width: 140mm; height: 32mm">
+        <use href="#torn-b" />
+      </svg>
+      <svg class="torn bottom left" style="width: 120mm; height: 30mm">
+        <use href="#torn-c" />
+      </svg>
+
+      <h1 class="sec">Propuesta al <span class="blue">Ayuntamiento</span></h1>
+      <svg class="scribble" style="--sc: var(--red)">
+        <use href="#scribble" />
+      </svg>
+      <p class="lead" style="max-width: 165mm">
+        Un programa municipal «¡Tú puedes!» para que todos los grupos de 1.º y
+        2.º de ESO de Arganda del Rey puedan disfrutar de la charla, sin coste
+        para los centros ni para las familias.
+      </p>
+
+      <!-- fases -->
+      <div style="position: relative; margin-top: 8mm">
+        <svg
+          viewBox="0 0 600 40"
+          preserveAspectRatio="none"
+          style="
+            position: absolute;
+            left: 8mm;
+            right: 8mm;
+            top: 9mm;
+            width: calc(100% - 16mm);
+            height: 8mm;
+            z-index: 0;
+          "
+        >
+          <path
+            d="M4 20 C120 8 220 32 330 18 C430 6 520 26 596 16"
+            fill="none"
+            stroke="var(--ink-2)"
+            stroke-width="3"
+            stroke-dasharray="10 8"
+            stroke-linecap="round"
+            vector-effect="non-scaling-stroke"
+          />
+        </svg>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4mm;
+            position: relative;
+            z-index: 1;
+          "
+        >
+          <div style="text-align: center">
+            <span
+              class="numc"
+              style="
+                margin: 0 auto;
+                background: var(--yellow);
+                border-radius: 50%;
+              "
+              ><svg><use href="#hcircle" /></svg>1</span
+            >
+            <h3 style="margin-top: 2.5mm">Pilotos</h3>
+            <p class="hand red" style="font-size: 14pt; line-height: 1">
+              otoño de 2026
+            </p>
+            <p style="font-size: 9.4pt; line-height: 1.38; margin-top: 1.5mm">
+              Primeras sesiones en institutos de Arganda, con su evaluación.
+            </p>
+          </div>
+          <div style="text-align: center">
+            <span
+              class="numc"
+              style="
+                margin: 0 auto;
+                background: var(--soft-blue);
+                border-radius: 50%;
+              "
+              ><svg><use href="#hcircle" /></svg>2</span
+            >
+            <h3 style="margin-top: 2.5mm">Ajuste</h3>
+            <p class="hand red" style="font-size: 14pt; line-height: 1">
+              enero de 2027
+            </p>
+            <p style="font-size: 9.4pt; line-height: 1.38; margin-top: 1.5mm">
+              Mejoras con los resultados de encuestas y valoraciones. Informe al
+              Ayuntamiento.
+            </p>
+          </div>
+          <div style="text-align: center">
+            <span
+              class="numc"
+              style="
+                margin: 0 auto;
+                background: var(--red);
+                color: #fff;
+                border-radius: 50%;
+              "
+              ><svg><use href="#hcircle" /></svg>3</span
+            >
+            <h3 style="margin-top: 2.5mm">Programa</h3>
+            <p class="hand red" style="font-size: 14pt; line-height: 1">
+              febrero-junio de 2027
+            </p>
+            <p style="font-size: 9.4pt; line-height: 1.38; margin-top: 1.5mm">
+              La charla en los grupos de 1.º y 2.º de ESO de los institutos que
+              se sumen.
+            </p>
+          </div>
+          <div style="text-align: center">
+            <span
+              class="numc"
+              style="
+                margin: 0 auto;
+                background: var(--mint);
+                color: #fff;
+                border-radius: 50%;
+              "
+              ><svg><use href="#hcircle" /></svg>4</span
+            >
+            <h3 style="margin-top: 2.5mm">Continuidad</h3>
+            <p class="hand red" style="font-size: 14pt; line-height: 1">
+              curso 2027-2028
+            </p>
+            <p style="font-size: 9.4pt; line-height: 1.38; margin-top: 1.5mm">
+              Repetir con las nuevas promociones y estudiar otros cursos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="
+          margin-top: 9mm;
+          display: flex;
+          gap: 5mm;
+          align-items: center;
+          padding: 4mm 6mm;
+          background: var(--soft-yellow);
+          border-radius: 3mm;
+          transform: rotate(-0.6deg);
+        "
+      >
+        <svg style="width: 13mm; height: 13mm; flex: none; --bl: var(--red)">
+          <use href="#i-spark" />
+        </svg>
+        <p style="font-size: 10.5pt">
+          <b>Lo que gana Arganda:</b> todo el alumnado de 1.º y 2.º de ESO del
+          municipio recibe el mismo mensaje, en su propio centro, sin depender
+          del presupuesto de cada instituto o de su AMPA.
+        </p>
+      </div>
+
+      <div class="row" style="gap: 7mm; margin-top: 10mm">
+        <div class="col card r shadow" style="padding: 5mm 6mm">
+          <span class="tape red"></span>
+          <h2>Qué os pedimos</h2>
+          <ul class="clean">
+            <li>
+              <b>Financiar las sesiones del programa</b>, para que sean
+              gratuitas para los institutos.
+            </li>
+            <li>Ayudarnos a presentarlo a los centros del municipio.</li>
+            <li>
+              Si lo veis adecuado, incluirlo en la oferta de actividades
+              educativas municipales.
+            </li>
+          </ul>
+        </div>
+        <div class="col card b shadow" style="padding: 5mm 6mm">
+          <span class="tape blue"></span>
+          <h2>Qué os ofrecemos</h2>
+          <ul class="clean blue-dots">
+            <li>
+              Sesiones coordinadas con cada centro y con su equipo de
+              orientación.
+            </li>
+            <li>
+              Un informe de resultados al cerrar cada fase, con datos anónimos y
+              agregados.
+            </li>
+            <li>
+              Mención del apoyo del Ayuntamiento en nuestros materiales, si lo
+              autorizáis.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="card"
+        style="
+          margin-top: 9mm;
+          padding: 4.5mm 6mm;
+          display: flex;
+          gap: 5mm;
+          align-items: center;
+          border-style: dashed;
+        "
+      >
+        <svg class="ic" style="width: 14mm; height: 14mm; --bl: var(--yellow)">
+          <use href="#i-survey" />
+        </svg>
+        <p style="font-size: 10pt">
+          <b>Presupuesto a medida.</b> Lo preparamos según el número de centros
+          y grupos que se sumen, con los resultados de los pilotos sobre la
+          mesa.
+        </p>
+      </div>
+      <div class="pnum">10</div>
+    </section>
+
+    <!-- ========================= 11 · CONTACTO ========================= -->
+    <section class="page">
+      <svg class="torn top left flipx" style="width: 150mm; height: 36mm">
+        <use href="#torn-c" />
+      </svg>
+      <svg class="torn bottom right" style="width: 150mm; height: 40mm">
+        <use href="#torn-a" />
+      </svg>
+
+      <div style="position: relative; height: 230mm; margin-top: 6mm">
+        <!-- flechas desde el centro -->
+        <svg
+          viewBox="0 0 174 230"
+          style="
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+          "
+        >
+          <defs>
+            <marker
+              id="ah"
+              viewBox="0 0 10 10"
+              refX="7"
+              refY="5"
+              markerWidth="5"
+              markerHeight="5"
+              orient="auto-start-reverse"
+            >
+              <path
+                d="M1 1 L8 5 L1 9"
+                fill="none"
+                stroke="#1F1A17"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </marker>
+          </defs>
+          <g
+            fill="none"
+            stroke="#1F1A17"
+            stroke-width=".8"
+            stroke-linecap="round"
+            marker-end="url(#ah)"
+          >
+            <path d="M66 84 C60 74 50 70 42 60" />
+            <path d="M110 84 C116 72 126 66 132 56" />
+            <path d="M64 128 C58 136 50 140 44 148" />
+            <path d="M112 128 C120 136 126 140 132 146" />
+          </g>
+        </svg>
+        <!-- centro -->
+        <div
+          class="oval"
+          style="
+            left: 50mm;
+            top: 82mm;
+            width: 76mm;
+            height: 46mm;
+            transform: rotate(-4deg);
+          "
+        >
+          <svg style="--hc: var(--ink)"><use href="#hoval" /></svg>
+          <div class="t red" style="font-size: 34pt">¡Hablamos!</div>
+        </div>
+        <!-- Andrés -->
+        <div
+          class="oval"
+          style="
+            left: 0;
+            top: 14mm;
+            width: 72mm;
+            height: 40mm;
+            transform: rotate(-3deg);
+          "
+        >
+          <svg><use href="#hoval" /></svg>
+          <div class="t" style="font-size: 17pt">
+            Andrés Simarro<small>692 060 673</small>
+          </div>
+        </div>
+        <!-- Iván -->
+        <div
+          class="oval"
+          style="
+            right: 0;
+            top: 10mm;
+            width: 72mm;
+            height: 40mm;
+            transform: rotate(3deg);
+          "
+        >
+          <svg><use href="#hoval" /></svg>
+          <div class="t" style="font-size: 17pt">
+            Iván Garrido<small>655 021 439</small>
+          </div>
+        </div>
+        <!-- correo -->
+        <div
+          class="oval"
+          style="
+            left: 4mm;
+            top: 150mm;
+            width: 76mm;
+            height: 40mm;
+            transform: rotate(2deg);
+          "
+        >
+          <svg><use href="#hoval" /></svg>
+          <div class="t" style="font-size: 17pt">
+            Correo<small>info@achusychusita.es</small>
+          </div>
+        </div>
+        <svg
+          class="deco"
+          style="left: 2mm; top: 138mm; width: 12mm; height: 12mm"
+        >
+          <use href="#i-mail" />
+        </svg>
+        <!-- marca -->
+        <div
+          class="oval"
+          style="
+            right: 2mm;
+            top: 148mm;
+            width: 76mm;
+            height: 44mm;
+            transform: rotate(-2deg);
+          "
+        >
+          <svg><use href="#hoval" /></svg>
+          <div class="t" style="font-size: 17pt">
+            ¡Tú puedes!<small
+              >Charlas de humor y motivación<br />Arganda del Rey</small
+            >
+          </div>
+        </div>
+        <svg
+          class="deco"
+          style="left: 6mm; top: 6mm; width: 12mm; height: 12mm"
+        >
+          <use href="#i-phone" />
+        </svg>
+        <svg
+          class="deco"
+          style="right: 6mm; top: 2mm; width: 12mm; height: 12mm"
+        >
+          <use href="#i-phone" />
+        </svg>
+        <svg
+          class="deco"
+          style="
+            left: 84mm;
+            top: 20mm;
+            width: 12mm;
+            height: 12mm;
+            --bl: var(--yellow);
+          "
+        >
+          <use href="#i-spark" />
+        </svg>
+        <svg
+          class="deco"
+          style="
+            left: 88mm;
+            top: 186mm;
+            width: 10mm;
+            height: 10mm;
+            --bl: var(--blue);
+          "
+        >
+          <use href="#i-spark" />
+        </svg>
+      </div>
+
+      <div style="text-align: center; margin-top: -10mm">
+        <span class="display" style="font-size: 30pt">¡Tú…!</span>
+        <span class="display red" style="font-size: 30pt; margin-left: 4mm"
+          >…puedes!</span
+        >
+        <p
+          class="hand"
+          style="font-size: 17pt; color: var(--ink-2); margin-top: 1mm"
+        >
+          Gracias por leernos.
+        </p>
+      </div>
+      <div class="pnum">11</div>
+    </section>
+  </body>
+</html>
